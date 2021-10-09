@@ -1,0 +1,28 @@
+<h1>Show Profile</h1>
+
+<ul>
+
+  <li>
+    <strong>First name:</strong>
+    <%= @profile.first_name %>
+  </li>
+
+  <li>
+    <strong>Last name:</strong>
+    <%= @profile.last_name %>
+  </li>
+
+  <li>
+    <strong>Username:</strong>
+    <%= @profile.username %>
+  </li>
+
+  <li>
+    <strong>Favorite genre:</strong>
+    <%= @profile.favorite_genre %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.profile_path(@conn, :edit, @profile) %></span> |
+<span><%= link "Back", to: Routes.profile_path(@conn, :index) %></span>
