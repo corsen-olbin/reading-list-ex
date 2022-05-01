@@ -4,8 +4,11 @@ defmodule ReadingListEx.Library.Book do
 
   schema "books" do
     field :isbn_13, :string
+    field :title, :string
 
-    belongs_to :profile, ReadingListEx.Library.Profile
+    has_many :profile_book, ReadingListEx.Library.ProfileBook
+    has_many :profile,
+      through: [:profile_book, :profile]
 
     timestamps()
   end

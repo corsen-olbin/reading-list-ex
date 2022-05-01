@@ -34,7 +34,7 @@ defmodule ReadingListEx.MixProject do
   defp deps do
     [
       {:pbkdf2_elixir, "~> 1.0"},
-      {:phoenix, "~> 1.6.0"},
+      {:phoenix, "~> 1.6.7"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},
       {:postgrex, ">= 0.0.0"},

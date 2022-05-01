@@ -7,9 +7,12 @@ defmodule ReadingListEx.Library.Profile do
     field :first_name, :string
     field :last_name, :string
     field :username, :string
-    field :user_id, :id
 
-    has_many :book, ReadingListEx.Library.Book
+    belongs_to :user, ReadingListEx.Accounts.User
+
+    has_many :profile_book, ReadingListEx.Library.ProfileBook
+    has_many :book,
+      through: [:profile_book, :book]
 
     timestamps()
   end
@@ -18,7 +21,8 @@ defmodule ReadingListEx.Library.Profile do
   def changeset(profile, attrs) do
     profile
     |> cast(attrs, [:first_name, :last_name, :username, :favorite_genre])
-    |> validate_required([:first_name, :last_name, :username, :favorite_genre])
+    |> validate_required([:first_name, :last_name, :username])
+    |> validate_length(:username, min: 4, max: 30)
     |> unique_constraint(:username)
   end
 end

@@ -37,9 +37,14 @@ defmodule ReadingListEx.Library do
   """
   def get_profile!(id), do: Repo.get!(Profile, id)
 
-  def get_profile_by_user(user_id) do
-    Repo.one(from p in Profile, where: p.user_id == ^user_id)
+  def get_profile_by_user(user) do
+    query =
+      from profile in ReadingListEx.Library.Profile,
+        where: [user_id: ^user.id],
+        select: profile
+    Repo.one(query)
   end
+
 
   @doc """
   Creates a profile.

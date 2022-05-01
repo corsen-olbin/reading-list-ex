@@ -1,11 +1,9 @@
 import Config
 
+import_config "dev.secrets.exs"
+
 # Configure your database
 config :reading_list_ex, ReadingListEx.Repo,
-  username: "postgres",
-  password: "Giraffe19",
-  database: "reading_list_ex_dev",
-  hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
@@ -22,7 +20,6 @@ config :reading_list_ex, ReadingListExWeb.Endpoint,
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "3zNWU8Jq2k/xAI4YyxkCI7xQ4HAs3rmC0vwzzwF3hRZ3DHfGFG7iv96EtiM1URtI",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}

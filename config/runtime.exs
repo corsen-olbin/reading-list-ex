@@ -14,11 +14,14 @@ if config_env() == :prod do
       For example: ecto://USER:PASS@HOST/DATABASE
       """
 
+  maybe_ipv6 = if System.get_env("ECTO_IPV6"), do: [:inet6], else: []
+
   config :reading_list_ex, ReadingListEx.Repo,
     # ssl: true,
     # socket_options: [:inet6],
     url: database_url,
-    pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
+    pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+    socket_options: maybe_ipv6
 
   # The secret key base is used to sign/encrypt cookies and other secrets.
   # A default value is used in config/dev.exs and config/test.exs but you
@@ -32,6 +35,8 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
+  host = System.get_env("PHX_HOST") || "example.com"
+
   config :reading_list_ex, ReadingListExWeb.Endpoint,
     http: [
       # Enable IPv6 and bind on all interfaces.
@@ -41,7 +46,8 @@ if config_env() == :prod do
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
       port: String.to_integer(System.get_env("PORT") || "4000")
     ],
-    secret_key_base: secret_key_base
+    secret_key_base: secret_key_base,
+    url: [host: host, port: 443]
 
   # ## Using releases
   #
@@ -52,6 +58,9 @@ if config_env() == :prod do
   #
   # Then you can assemble a release by calling `mix release`.
   # See `mix help release` for more information.
+  if System.get_env("PHX_SERVER") do
+    config :reading_list_ex, ReadingListExWeb.Endpoint, server: true
+  end
 
   # ## Configuring the mailer
   #

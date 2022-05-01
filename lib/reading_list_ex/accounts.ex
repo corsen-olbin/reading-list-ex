@@ -3,10 +3,13 @@ defmodule ReadingListEx.Accounts do
   The Accounts context.
   """
 
+  require Logger
+
   import Ecto.Query, warn: false
   alias ReadingListEx.Repo
 
   alias ReadingListEx.Accounts.{User, UserToken, UserNotifier}
+  alias ReadingListEx.Library.Profile
 
   ## Database getters
 
@@ -75,9 +78,13 @@ defmodule ReadingListEx.Accounts do
 
   """
   def register_user(attrs) do
-    %User{}
-    |> User.registration_changeset(attrs)
-    |> Repo.insert()
+    profile_changeset = Profile.changeset(%Profile{}, attrs["profile"])
+
+    user_changeset =
+      User.registration_changeset(%User{}, attrs)
+      |> Ecto.Changeset.put_assoc(:profile, profile_changeset)
+
+    Repo.insert(user_changeset)
   end
 
   @doc """
@@ -89,7 +96,7 @@ defmodule ReadingListEx.Accounts do
       %Ecto.Changeset{data: %User{}}
 
   """
-  def change_user_registration(%User{} = user, attrs \\ %{}) do
+  def change_user_registration(user, attrs \\ %{}) do
     User.registration_changeset(user, attrs, hash_password: false)
   end
 
@@ -108,6 +115,15 @@ defmodule ReadingListEx.Accounts do
     User.email_changeset(user, attrs)
   end
 
+  @spec apply_user_email(
+          {map, map}
+          | %{
+              :__struct__ => atom | %{:__changeset__ => map, optional(any) => any},
+              optional(atom) => any
+            },
+          any,
+          :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}
+        ) :: {:error, Ecto.Changeset.t()} | {:ok, map}
   @doc """
   Emulates that the email will change without actually changing
   it in the database.
@@ -231,6 +247,7 @@ defmodule ReadingListEx.Accounts do
     Repo.one(query)
   end
 
+  @spec delete_session_token(any) :: :ok
   @doc """
   Deletes the signed token with the given context.
   """

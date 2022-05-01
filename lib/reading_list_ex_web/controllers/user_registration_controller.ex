@@ -4,9 +4,11 @@ defmodule ReadingListExWeb.UserRegistrationController do
   alias ReadingListEx.Accounts
   alias ReadingListEx.Accounts.User
   alias ReadingListExWeb.UserAuth
+  alias ReadingListEx.Library.Profile
 
   def new(conn, _params) do
-    changeset = Accounts.change_user_registration(%User{})
+    profile_changeset = Profile.changeset(%Profile{}, %{})
+    changeset = Accounts.change_user_registration(%User{profile: profile_changeset})
     render(conn, "new.html", changeset: changeset)
   end
 

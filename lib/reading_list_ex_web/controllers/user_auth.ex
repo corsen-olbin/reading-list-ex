@@ -92,7 +92,7 @@ defmodule ReadingListExWeb.UserAuth do
   def fetch_current_user(conn, _opts) do
     {user_token, conn} = ensure_user_token(conn)
     user = user_token && Accounts.get_user_by_session_token(user_token)
-    profile = Library.get_profile_by_user(user.id)
+    profile = user && Library.get_profile_by_user(user)
 
     conn
     |> assign(:current_user, user)
