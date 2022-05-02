@@ -89,7 +89,7 @@ COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/reading_list_
 
 USER nobody
 
-chmod +x /app/bin/*
+RUN chmod +x /app/bin/*
 
 CMD ["/app/bin/server"]
 # Appended by flyctl
