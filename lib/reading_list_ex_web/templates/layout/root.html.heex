@@ -5,26 +5,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <%= csrf_meta_tag() %>
-    <%= live_title_tag assigns[:page_title] || "ReadingListEx", suffix: " · Phoenix Framework" %>
+    <link phx-track-static rel="icon" href={Routes.static_path(@conn, "/images/icons8-book-color-16.png")}>
+    <%= live_title_tag assigns[:page_title] || "ReadingListEx"%>
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
   </head>
-  <body>
-    <header>
-      <section class="container">
-        <nav>
-          <ul>
+  <body class="flex flex-col min-h-screen">
+    <div class="relative bg-white">
+      <div class="mx-auto px-4 sm:px-6">
+        <div class="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
+          <div class="flex justify-start text-2xl text-purple-700 lg:w-0 lg:flex-1">
+            <%= link "Reading List EX", to: Routes.page_path(@conn, :index) %>
+          </div>
+          
+          <nav class="hidden w-1/5 md:flex space-x-10">
+            <input class="w-full" type="text" placeholder="Search for your next read">
+          </nav>
+          <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
             <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-              <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
+              <div class="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-900"><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></div>
             <% end %>
-          </ul>
-          <%= render "_user_menu.html", assigns %>
-        </nav>
-        <a href="https://phoenixframework.org/" class="phx-logo">
-          <img src={Routes.static_path(@conn, "/images/phoenix.png")} alt="Phoenix Framework Logo"/>
-        </a>
-      </section>
-    </header>
+            <%= render "_user_menu.html", assigns %>
+          </div>
+        </div>
+      </div>
+      
+    </div>
     <%= @inner_content %>
+    <footer class="bg-gray-50">
+      <div class="max-w-screen-xl px-4 py-8 mx-auto space-y-10 sm:px-6 lg:px-8">
+        <div class="sm:items-center sm:justify-between sm:flex">
+
+          <div class="flex mt-8 space-x-6 text-gray-500 sm:mt-0">
+
+            <a class="hover:opacity-75" href="https://github.com/corsen-olbin/reading-list-ex" target="_blank" rel="noreferrer">
+              <span class="sr-only"> GitHub </span>
+
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="justify-end text-sm text-gray-500">
+          <p>Website by Corbin Olsen</p>
+          <p>Icons from <a class="underline" href="https://icons8.com">icons8.com</a></p>
+        </div>
+      </div>
+      
+    </footer>
   </body>
 </html>
