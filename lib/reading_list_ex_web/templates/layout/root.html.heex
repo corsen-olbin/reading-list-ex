@@ -14,10 +14,10 @@
     <div class="relative bg-white">
       <div class="mx-auto px-4 sm:px-6">
         <div class="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
-          <div class="flex justify-start text-2xl text-purple-700 lg:w-0 lg:flex-1">
-            <%= link "Reading List EX", to: Routes.page_path(@conn, :index) %>
+          <div class="flex justify-start text-2xl text-indigo-700 lg:w-0 lg:flex-1">
+            <a href="/">Reading List <i>EX</i></a>
           </div>
-          
+
           <nav class="hidden w-1/5 md:flex space-x-10">
             <input class="w-full" type="text" placeholder="Search for your next read">
           </nav>
@@ -29,7 +29,7 @@
           </div>
         </div>
       </div>
-      
+
     </div>
     <%= @inner_content %>
     <footer class="bg-gray-50">
@@ -52,7 +52,7 @@
           <p>Icons from <a class="underline" href="https://icons8.com">icons8.com</a></p>
         </div>
       </div>
-      
+
     </footer>
   </body>
 </html>

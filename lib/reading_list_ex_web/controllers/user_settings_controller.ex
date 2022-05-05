@@ -1,7 +1,7 @@
 defmodule ReadingListExWeb.UserSettingsController do
   use ReadingListExWeb, :controller
 
-  alias ReadingListEx.Accounts
+  alias ReadingListEx.{Accounts, Library}
   alias ReadingListExWeb.UserAuth
 
   plug :assign_email_and_password_changesets
@@ -50,6 +50,21 @@ defmodule ReadingListExWeb.UserSettingsController do
     end
   end
 
+  def update(conn, %{"action" => "update_profile"} = params) do
+    %{"profile" => profile_params} = params
+    profile = conn.assigns.current_profile
+
+    case Library.update_profile(profile, profile_params) do
+      {:ok, _profile} ->
+        conn
+        |> put_flash(:info, "Profile updated successfully.")
+        |> redirect(to: Routes.user_settings_path(conn, :edit))
+
+      {:error, changeset} ->
+        render(conn, "edit.html", profile_changeset: changeset)
+    end
+  end
+
   def confirm_email(conn, %{"token" => token}) do
     case Accounts.update_user_email(conn.assigns.current_user, token) do
       :ok ->
@@ -66,9 +81,11 @@ defmodule ReadingListExWeb.UserSettingsController do
 
   defp assign_email_and_password_changesets(conn, _opts) do
     user = conn.assigns.current_user
+    profile = conn.assigns.current_profile
 
     conn
     |> assign(:email_changeset, Accounts.change_user_email(user))
     |> assign(:password_changeset, Accounts.change_user_password(user))
+    |> assign(:profile_changeset, Library.change_profile(profile))
   end
 end

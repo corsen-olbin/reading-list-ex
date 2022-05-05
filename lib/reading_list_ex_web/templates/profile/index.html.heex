@@ -20,13 +20,9 @@
       <td><%= profile.favorite_genre %></td>
 
       <td>
-        <span><%= link "Show", to: Routes.profile_path(@conn, :show, profile) %></span>
-        <span><%= link "Edit", to: Routes.profile_path(@conn, :edit, profile) %></span>
-        <span><%= link "Delete", to: Routes.profile_path(@conn, :delete, profile), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <span><%= link "Show", to: Routes.profiles_path(@conn, :show, profile) %></span>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
-
-<span><%= link "New Profile", to: Routes.profile_path(@conn, :new) %></span>
