@@ -21,7 +21,7 @@ defmodule ReadingListExWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    resources "/books", BookController
+    resources "/books", BookController, only: [:index, :show]
     resources "/profiles", ProfilesController, only: [:index, :show]
   end
 
