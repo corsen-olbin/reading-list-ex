@@ -9,4 +9,8 @@ defmodule ReadingListEx.Library.ProfileBook do
 
     timestamps()
   end
+
+  def changeset(profile_book) do
+    change(profile_book)
+  end
 end

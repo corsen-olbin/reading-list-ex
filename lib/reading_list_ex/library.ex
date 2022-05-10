@@ -143,6 +143,22 @@ defmodule ReadingListEx.Library do
   def get_book!(id), do: Repo.get!(Book, id)
 
   @doc """
+  Gets a single book by isbn13
+
+  Returns nil if the Book does not exist.
+
+  ## Examples
+
+      iex> get_book_by_isbn13(123)
+      %Book{}
+
+      iex> get_book_by_isbn13(456)
+      nil
+
+  """
+  def get_book_by_isbn13(isbn_13), do: Repo.get_by(Book, isbn_13: isbn_13)
+
+  @doc """
   Creates a book.
 
   ## Examples
@@ -205,5 +221,30 @@ defmodule ReadingListEx.Library do
   """
   def change_book(%Book{} = book, attrs \\ %{}) do
     Book.changeset(book, attrs)
+  end
+
+  alias ReadingListEx.Library.ProfileBook
+
+  @doc """
+  Creates a profile.
+
+  ## Examples
+
+      iex> create_profile_book(%{field: value})
+      {:ok, %ProfileBook{}}
+
+      iex> create_profile(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_profile_book(%Profile{} = profile, %Book{} = book) do
+    %ProfileBook{}
+    |> ProfileBook.changeset()
+    |> Ecto.Changeset.put_assoc(:profile, profile)
+    |> Ecto.Changeset.put_assoc(:book, book)
+    |> Repo.insert(
+      on_conflict: :nothing,
+      conflict_target: [:profile_id, :book_id]
+    )
   end
 end

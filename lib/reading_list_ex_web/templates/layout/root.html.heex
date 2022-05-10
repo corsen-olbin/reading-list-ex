@@ -18,8 +18,12 @@
             <a href="/">Reading List <i>EX</i></a>
           </div>
 
-          <nav class="hidden w-1/5 md:flex space-x-10">
-            <input class="w-full" type="text" placeholder="Search for your next read">
+          <nav>
+            <%= form_for @conn, Routes.search_path(@conn, :index), [method: :get], fn f -> %>
+              <div class="hidden w-1/5 md:flex space-x-10">
+                <%= search_input f, :query %>
+              </div>
+            <% end %>
           </nav>
           <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
             <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
