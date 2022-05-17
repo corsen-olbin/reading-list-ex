@@ -11,6 +11,8 @@ defmodule ReadingListEx.Library.ProfileBook do
   end
 
   def changeset(profile_book) do
-    change(profile_book)
+    profile_book
+    |> change()
+    |> unique_constraint(:unique_profile_book, name: :unique_profile_book)
   end
 end

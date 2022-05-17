@@ -81,6 +81,7 @@ defmodule ReadingListExWeb.Router do
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
+    post "/profilebooks", ProfileBooksController, :create
 
   end
 

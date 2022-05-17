@@ -143,7 +143,7 @@ defmodule ReadingListEx.Library do
   def get_book!(id), do: Repo.get!(Book, id)
 
   @doc """
-  Gets a single book by isbn13
+  Gets a single book by google_api_id
 
   Returns nil if the Book does not exist.
 
@@ -156,7 +156,7 @@ defmodule ReadingListEx.Library do
       nil
 
   """
-  def get_book_by_isbn13(isbn_13), do: Repo.get_by(Book, isbn_13: isbn_13)
+  def get_book_by_google_api_id(google_id), do: Repo.get_by(Book, google_api_id: google_id)
 
   @doc """
   Creates a book.
