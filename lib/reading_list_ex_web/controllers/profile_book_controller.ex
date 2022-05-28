@@ -4,6 +4,13 @@ defmodule ReadingListExWeb.ProfileBooksController do
   alias ReadingListEx.Library
   alias ReadingListEx.Library.{Book}
 
+  def index(conn, _params) do
+    profile = conn.assigns.current_profile
+
+    books = Library.get_profile_books_by_profile(profile)
+    render(conn, "index.html", books: books)
+  end
+
   def create(conn, %{"google_id" => google_id}) do
     profile = conn.assigns.current_profile
 

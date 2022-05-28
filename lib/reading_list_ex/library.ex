@@ -225,6 +225,15 @@ defmodule ReadingListEx.Library do
 
   alias ReadingListEx.Library.ProfileBook
 
+  def get_profile_books_by_profile(profile) do
+    query =
+      from profile_book in ReadingListEx.Library.ProfileBook,
+        where: [profile_id: ^profile.id],
+        preload: [:book],
+        select: profile_book
+    Repo.all(query)
+  end
+
   @doc """
   Creates a profile.
 
