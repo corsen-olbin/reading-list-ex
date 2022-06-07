@@ -1,10 +1,10 @@
-<h1>Listing Books</h1>
 
-<table>
+<table class="table-auto w-4/5 mx-auto justify-center">
   <thead>
     <tr>
       <th>Isbn 13</th>
 
+      <th>Title</th>
       <th></th>
     </tr>
   </thead>
@@ -12,9 +12,9 @@
 <%= for book <- @books do %>
     <tr>
       <td><%= book.book.isbn_13 %></td>
-
-      <td>
-        <span><%= link "Show", to: Routes.book_path(@conn, :show, book.book) %></span>
+      <td><%= book.book.title %></td>
+      <td >
+        <span class="grid justify-center mx-auto"><%= link "Delete", to: Routes.profile_books_path(@conn, :delete, book.id), method: :delete %></span>
       </td>
     </tr>
 <% end %>

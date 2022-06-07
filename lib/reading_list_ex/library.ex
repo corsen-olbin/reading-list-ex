@@ -225,6 +225,22 @@ defmodule ReadingListEx.Library do
 
   alias ReadingListEx.Library.ProfileBook
 
+  @doc """
+  Gets a single book.
+
+  Raises `Ecto.NoResultsError` if the Book does not exist.
+
+  ## Examples
+
+      iex> get_book!(123)
+      %Book{}
+
+      iex> get_book!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_profile_book(id), do: Repo.get(ProfileBook, id)
+
   def get_profile_books_by_profile(profile) do
     query =
       from profile_book in ReadingListEx.Library.ProfileBook,
@@ -255,5 +271,9 @@ defmodule ReadingListEx.Library do
       on_conflict: :nothing,
       conflict_target: [:profile_id, :book_id]
     )
+  end
+
+  def delete_profile_book(%ProfileBook{} = profile_book) do
+    Repo.delete(profile_book)
   end
 end

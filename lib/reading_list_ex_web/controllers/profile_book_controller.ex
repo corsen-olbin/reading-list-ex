@@ -2,7 +2,7 @@ defmodule ReadingListExWeb.ProfileBooksController do
   use ReadingListExWeb, :controller
 
   alias ReadingListEx.Library
-  alias ReadingListEx.Library.{Book}
+  alias ReadingListEx.Library.{Book, ProfileBook}
 
   def index(conn, _params) do
     profile = conn.assigns.current_profile
@@ -40,8 +40,23 @@ defmodule ReadingListExWeb.ProfileBooksController do
         |> put_flash(:info, "Failed to add Book to Library.")
         |> redirect(to: Routes.search_path(conn, :index, %{"query" => "left hand of darkness"}))
     end
+  end
 
+  def delete(conn, %{"id" => id}) do
+    profile = conn.assigns.current_profile
 
+    case Library.get_profile_book(id) do
+      profile_book when profile_book.profile_id == profile.id ->
+        Library.delete_profile_book(profile_book)
+
+        conn
+        |> put_flash(:info, "Book removed from Library.")
+
+      _ ->
+        conn
+        |> put_flash(:info, "Failed to remove book from Library.")
+    end
+    |> redirect(to: Routes.profile_books_path(conn, :index))
   end
 
   defp convert_params_to_book(book_params, isbn_13) do
