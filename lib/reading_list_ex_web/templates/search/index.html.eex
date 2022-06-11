@@ -30,7 +30,8 @@
             <td class="px-6 py-4 whitespace-nowrap">
               <%= form_for @conn, Routes.profile_books_path(@conn, :create), fn f -> %>
                 <%= hidden_input f, :action, name: "google_id", value: book["id"] %>
-                <%= submit "Search" %>
+                <%= hidden_input f, :query, value: @conn.query_params["query"] %>
+                <%= submit "Add to Library" %>
               <% end %>
               
             </td>

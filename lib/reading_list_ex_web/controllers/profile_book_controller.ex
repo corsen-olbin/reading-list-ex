@@ -11,7 +11,7 @@ defmodule ReadingListExWeb.ProfileBooksController do
     render(conn, "index.html", books: books)
   end
 
-  def create(conn, %{"google_id" => google_id}) do
+  def create(conn, %{"google_id" => google_id, "query" => query}) do
     profile = conn.assigns.current_profile
 
     {:ok, book} = ReadingListEx.GoogleAPIHelper.query_book(google_id)
@@ -33,12 +33,12 @@ defmodule ReadingListExWeb.ProfileBooksController do
       {:ok, _} ->
         conn
         |> put_flash(:info, "Book added to Library successfully.")
-        |> redirect(to: Routes.search_path(conn, :index, %{"query" => "left hand of darkness"}))
+        |> redirect(to: Routes.search_path(conn, :index, %{"query" => query}))
 
       {:error, _} ->
         conn
         |> put_flash(:info, "Failed to add Book to Library.")
-        |> redirect(to: Routes.search_path(conn, :index, %{"query" => "left hand of darkness"}))
+        |> redirect(to: Routes.search_path(conn, :index, %{"query" => query}))
     end
   end
 
