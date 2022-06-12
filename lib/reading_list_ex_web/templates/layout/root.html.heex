@@ -14,13 +14,18 @@
     <div class="relative bg-white">
       <div class="mx-auto px-4 sm:px-6">
         <div class="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
-          <div class="flex justify-start text-2xl text-indigo-700 lg:w-0 lg:flex-1">
+          <div class="flex justify-start text-2xl text-indigo-700 md:flex-1 lg:w-0">
             <a href="/">Reading List <i>EX</i></a>
           </div>
-
-          <nav class="hidden w-1/5 md:flex space-x-10">
-            <input class="w-full" type="text" placeholder="Search for your next read">
+          <div class="justify-center md:flex-1 lg:w-0">
+          <nav class="justify-center">
+            <%= form_for @conn, Routes.search_path(@conn, :index), [method: :get], fn f -> %>
+              <div class="hidden w-full md:flex">
+                <%= search_input f, :query, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+              </div>
+            <% end %>
           </nav>
+          </div>
           <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
             <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
               <div class="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-900"><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></div>

@@ -9,4 +9,10 @@ defmodule ReadingListEx.Library.ProfileBook do
 
     timestamps()
   end
+
+  def changeset(profile_book) do
+    profile_book
+    |> change()
+    |> unique_constraint(:unique_profile_book, name: :unique_profile_book)
+  end
 end

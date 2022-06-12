@@ -15,7 +15,7 @@ defmodule ReadingListExWeb.BookController do
   end
 
   def create(conn, %{"book" => book_params}) do
-    map = Map.merge(book_params, %{ "profile_id" => conn.assigns.current_profile.id }) |> IO.inspect
+    map = Map.merge(book_params, %{ "profile_id" => conn.assigns.current_profile.id })
     case Library.create_book(map) do
       {:ok, book} ->
         conn

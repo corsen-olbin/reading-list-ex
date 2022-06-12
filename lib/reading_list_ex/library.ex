@@ -143,6 +143,22 @@ defmodule ReadingListEx.Library do
   def get_book!(id), do: Repo.get!(Book, id)
 
   @doc """
+  Gets a single book by google_api_id
+
+  Returns nil if the Book does not exist.
+
+  ## Examples
+
+      iex> get_book_by_isbn13(123)
+      %Book{}
+
+      iex> get_book_by_isbn13(456)
+      nil
+
+  """
+  def get_book_by_google_api_id(google_id), do: Repo.get_by(Book, google_api_id: google_id)
+
+  @doc """
   Creates a book.
 
   ## Examples
@@ -205,5 +221,59 @@ defmodule ReadingListEx.Library do
   """
   def change_book(%Book{} = book, attrs \\ %{}) do
     Book.changeset(book, attrs)
+  end
+
+  alias ReadingListEx.Library.ProfileBook
+
+  @doc """
+  Gets a single book.
+
+  Raises `Ecto.NoResultsError` if the Book does not exist.
+
+  ## Examples
+
+      iex> get_book!(123)
+      %Book{}
+
+      iex> get_book!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_profile_book(id), do: Repo.get(ProfileBook, id)
+
+  def get_profile_books_by_profile(profile) do
+    query =
+      from profile_book in ReadingListEx.Library.ProfileBook,
+        where: [profile_id: ^profile.id],
+        preload: [:book],
+        select: profile_book
+    Repo.all(query)
+  end
+
+  @doc """
+  Creates a profile.
+
+  ## Examples
+
+      iex> create_profile_book(%{field: value})
+      {:ok, %ProfileBook{}}
+
+      iex> create_profile(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_profile_book(%Profile{} = profile, %Book{} = book) do
+    %ProfileBook{}
+    |> ProfileBook.changeset()
+    |> Ecto.Changeset.put_assoc(:profile, profile)
+    |> Ecto.Changeset.put_assoc(:book, book)
+    |> Repo.insert(
+      on_conflict: :nothing,
+      conflict_target: [:profile_id, :book_id]
+    )
+  end
+
+  def delete_profile_book(%ProfileBook{} = profile_book) do
+    Repo.delete(profile_book)
   end
 end

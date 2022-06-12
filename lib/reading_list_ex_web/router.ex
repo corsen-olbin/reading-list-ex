@@ -21,6 +21,7 @@ defmodule ReadingListExWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/search", SearchController, :index
     resources "/books", BookController, only: [:index, :show]
     resources "/profiles", ProfilesController, only: [:index, :show]
   end
@@ -80,6 +81,9 @@ defmodule ReadingListExWeb.Router do
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
+    post "/profilebooks", ProfileBooksController, :create
+    delete "/profilebooks/:id", ProfileBooksController, :delete
+    get "/library", ProfileBooksController, :index
 
   end
 
