@@ -7,10 +7,6 @@ defmodule ReadingListEx.GoogleAPIHelper do
     execute_query("#{google_book_url()}/volumes?#{query}")
   end
 
-  @spec query_book(any) ::
-          {:error, any}
-          | {:ok,
-             false | nil | true | binary | maybe_improper_list(any, binary | []) | number | map}
   def query_book(book_id) do
     execute_query("#{google_book_url()}/volumes/#{book_id}")
   end

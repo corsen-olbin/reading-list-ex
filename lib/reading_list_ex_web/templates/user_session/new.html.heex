@@ -9,13 +9,13 @@
   <% end %>
 
   <div class="mb-6">
-  <%= label f, :email, class: "block text-gray-700 text-sm font-bold mb-2" %>
-  <%= email_input f, :email, required: true, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
-</div>
-<div class="mb-6">
-  <%= label f, :password, class: "block text-gray-700 text-sm font-bold mb-2" %>
-  <%= password_input f, :password, required: true, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
-</div>
+    <%= label f, :email, class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= email_input f, :email, required: true, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+  </div>
+  <div class="mb-6">
+    <%= label f, :password, class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= password_input f, :password, required: true, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+  </div>
   <div class="flex items-center justify-between">
     <%= submit "Log in", class: "bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
     <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new), class: "inline-block align-baseline font-bold text-sm text-indigo-600 hover:text-blue-800" %>
