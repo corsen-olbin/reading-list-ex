@@ -84,7 +84,6 @@ defmodule ReadingListExWeb.Router do
     post "/profilebooks", ProfileBooksController, :create
     delete "/profilebooks/:id", ProfileBooksController, :delete
     get "/library", ProfileBooksController, :index
-
   end
 
   scope "/", ReadingListExWeb do

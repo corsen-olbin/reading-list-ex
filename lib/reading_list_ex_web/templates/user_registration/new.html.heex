@@ -6,40 +6,34 @@
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
   <% end %>
-
-  <%= label f, :email %>
-  <%= email_input f, :email, required: true %>
-  <%= error_tag f, :email %>
-
-  <%= label f, :password %>
-  <%= password_input f, :password, required: true %>
-  <%= error_tag f, :password %>
-
+   <%= label(f, :email) %> <%= email_input(f, :email, required: true) %> <%= error_tag(f, :email) %> <%= label(
+    f,
+    :password
+  ) %> <%= password_input(f, :password, required: true) %> <%= error_tag(f, :password) %>
   <%= inputs_for f, :profile, fn p -> %>
-
-    <%= label p, :username %>
-    <%= text_input p, :username, required: true %>
-    <%= error_tag p, :username %>
-
-    <%= label p, :first_name %>
-    <%= text_input p, :first_name, required: true %>
-    <%= error_tag p, :first_name %>
-
-    <%= label p, :last_name %>
-    <%= text_input p, :last_name, required: true %>
-    <%= error_tag p, :last_name %>
-
-    <%= label p, :favorite_genre %>
-    <%= text_input p, :favorite_genre %>
-    <%= error_tag p, :favorite_genre %>
-
-  <% end %> 
+    <%= label(p, :username) %> <%= text_input(p, :username, required: true) %> <%= error_tag(
+      p,
+      :username
+    ) %> <%= label(p, :first_name) %> <%= text_input(p, :first_name, required: true) %> <%= error_tag(
+      p,
+      :first_name
+    ) %> <%= label(p, :last_name) %> <%= text_input(p, :last_name, required: true) %> <%= error_tag(
+      p,
+      :last_name
+    ) %> <%= label(p, :favorite_genre) %> <%= text_input(p, :favorite_genre) %> <%= error_tag(
+      p,
+      :favorite_genre
+    ) %>
+  <% end %>
+  
   <div>
-    <%= submit "Register" %>
+    <%= submit("Register") %>
   </div>
 </.form>
 
 <p>
-  <%= link "Log in", to: Routes.user_session_path(@conn, :new) %> |
-  <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new) %>
+  <%= link("Log in", to: Routes.user_session_path(@conn, :new)) %> | <%= link(
+    "Forgot your password?",
+    to: Routes.user_reset_password_path(@conn, :new)
+  ) %>
 </p>
