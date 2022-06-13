@@ -4,25 +4,32 @@
   <thead>
     <tr>
       <th>First name</th>
+      
       <th>Last name</th>
+      
       <th>Username</th>
+      
       <th>Favorite genre</th>
-
+      
       <th></th>
     </tr>
   </thead>
+  
   <tbody>
-<%= for profile <- @profiles do %>
-    <tr>
-      <td><%= profile.first_name %></td>
-      <td><%= profile.last_name %></td>
-      <td><%= profile.username %></td>
-      <td><%= profile.favorite_genre %></td>
-
-      <td>
-        <span><%= link "Show", to: Routes.profiles_path(@conn, :show, profile) %></span>
-      </td>
-    </tr>
-<% end %>
+    <%= for profile <- @profiles do %>
+      <tr>
+        <td><%= profile.first_name %></td>
+        
+        <td><%= profile.last_name %></td>
+        
+        <td><%= profile.username %></td>
+        
+        <td><%= profile.favorite_genre %></td>
+        
+        <td>
+          <span><%= link("Show", to: Routes.profiles_path(@conn, :show, profile)) %></span>
+        </td>
+      </tr>
+    <% end %>
   </tbody>
 </table>

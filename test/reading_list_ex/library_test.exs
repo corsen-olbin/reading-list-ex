@@ -21,7 +21,12 @@ defmodule ReadingListEx.LibraryTest do
     end
 
     test "create_profile/1 with valid data creates a profile" do
-      valid_attrs = %{favorite_genre: "some favorite_genre", first_name: "some first_name", last_name: "some last_name", username: "some username"}
+      valid_attrs = %{
+        favorite_genre: "some favorite_genre",
+        first_name: "some first_name",
+        last_name: "some last_name",
+        username: "some username"
+      }
 
       assert {:ok, %Profile{} = profile} = Library.create_profile(valid_attrs)
       assert profile.favorite_genre == "some favorite_genre"
@@ -36,7 +41,13 @@ defmodule ReadingListEx.LibraryTest do
 
     test "update_profile/2 with valid data updates the profile" do
       profile = profile_fixture()
-      update_attrs = %{favorite_genre: "some updated favorite_genre", first_name: "some updated first_name", last_name: "some updated last_name", username: "some updated username"}
+
+      update_attrs = %{
+        favorite_genre: "some updated favorite_genre",
+        first_name: "some updated first_name",
+        last_name: "some updated last_name",
+        username: "some updated username"
+      }
 
       assert {:ok, %Profile{} = profile} = Library.update_profile(profile, update_attrs)
       assert profile.favorite_genre == "some updated favorite_genre"

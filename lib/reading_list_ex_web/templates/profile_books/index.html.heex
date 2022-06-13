@@ -1,22 +1,32 @@
-
 <table class="table-auto w-4/5 mx-auto justify-center text-sm divide-y divide-gray-200">
   <thead>
     <tr>
       <th class="p-4 font-medium text-left text-gray-900 whitespace-nowrap">Isbn 13</th>
-
+      
       <th class="p-4 font-medium text-left text-gray-900 whitespace-nowrap">Title</th>
+      
       <th></th>
     </tr>
   </thead>
+  
   <tbody class="divide-y divide-gray-100">
-<%= for book <- @books do %>
-    <tr>
-      <td class="p-4 font-medium text-gray-900 whitespace-nowrap"><%= book.book.isbn_13 %></td>
-      <td class="p-4 font-medium text-gray-900 whitespace-nowrap"><%= book.book.title %></td>
-      <td>
-        <span class="grid justify-center mx-auto"><%= link "Delete", to: Routes.profile_books_path(@conn, :delete, book.id), method: :delete, class: "bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %></span>
-      </td>
-    </tr>
-<% end %>
+    <%= for book <- @books do %>
+      <tr>
+        <td class="p-4 font-medium text-gray-900 whitespace-nowrap"><%= book.book.isbn_13 %></td>
+        
+        <td class="p-4 font-medium text-gray-900 whitespace-nowrap"><%= book.book.title %></td>
+        
+        <td>
+          <span class="grid justify-center mx-auto">
+            <%= link("Delete",
+              to: Routes.profile_books_path(@conn, :delete, book.id),
+              method: :delete,
+              class:
+                "bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            ) %>
+          </span>
+        </td>
+      </tr>
+    <% end %>
   </tbody>
 </table>

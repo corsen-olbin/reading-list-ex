@@ -1,5 +1,4 @@
 defmodule ReadingListEx.GoogleAPIHelper do
-
   def google_book_url, do: "https://www.googleapis.com/books/v1"
 
   def query_books(params) do

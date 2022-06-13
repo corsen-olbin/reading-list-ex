@@ -11,6 +11,7 @@ defmodule ReadingListEx.Library.Profile do
     belongs_to :user, ReadingListEx.Accounts.User
 
     has_many :profile_book, ReadingListEx.Library.ProfileBook
+
     has_many :book,
       through: [:profile_book, :book]
 
