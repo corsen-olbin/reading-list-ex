@@ -4,16 +4,16 @@
   <thead>
     <tr>
       <th>Isbn 13</th>
-      
+
       <th></th>
     </tr>
   </thead>
-  
+
   <tbody>
     <%= for book <- @books do %>
       <tr>
         <td><%= book.isbn_13 %></td>
-        
+
         <td>
           <span><%= link("Show", to: Routes.book_path(@conn, :show, book)) %></span>
           <span><%= link("Edit", to: Routes.book_path(@conn, :edit, book)) %></span>
@@ -29,4 +29,4 @@
     <% end %>
   </tbody>
 </table>
- <span><%= link("New Book", to: Routes.book_path(@conn, :new)) %></span>
+<span><%= link("New Book", to: Routes.book_path(@conn, :new)) %></span>
