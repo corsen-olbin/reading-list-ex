@@ -5,5 +5,5 @@
     <strong>Isbn 13:</strong> <%= @book.isbn_13 %>
   </li>
 </ul>
- <span><%= link("Edit", to: Routes.book_path(@conn, :edit, @book)) %></span> |
+<span><%= link("Edit", to: Routes.book_path(@conn, :edit, @book)) %></span> |
 <span><%= link("Back", to: Routes.book_path(@conn, :index)) %></span>
