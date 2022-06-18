@@ -20,7 +20,6 @@ defmodule ReadingListEx.Library.Book do
   def changeset(book, attrs) do
     book
     |> cast(attrs, [:isbn_13, :title, :subtitle, :google_api_id])
-    |> IO.inspect()
     |> validate_required([:isbn_13, :title, :google_api_id])
   end
 end
