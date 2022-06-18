@@ -47,6 +47,24 @@ defmodule ReadingListExWeb.ProfileBooksController do
     end
   end
 
+  def update(conn, %{"id" => id, "status" => new_status}) do
+    profile = conn.assigns.current_profile
+    new_status_atom = String.to_existing_atom(new_status)
+
+    case Library.get_profile_book(id) do
+      existing_pb when existing_pb.profile_id == profile.id ->
+        Library.update_profile_book(existing_pb, %{status: new_status_atom})
+
+        conn
+        |> put_flash(:info, "Book status updated.")
+
+      _ ->
+        conn
+        |> put_flash(:info, "Failed to update book status.")
+    end
+    |> redirect(to: Routes.profile_books_path(conn, :index))
+  end
+
   def delete(conn, %{"id" => id}) do
     profile = conn.assigns.current_profile
 
