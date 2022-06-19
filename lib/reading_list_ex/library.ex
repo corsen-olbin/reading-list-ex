@@ -265,13 +265,19 @@ defmodule ReadingListEx.Library do
   """
   def create_profile_book(%Profile{} = profile, %Book{} = book) do
     %ProfileBook{}
-    |> ProfileBook.changeset()
+    |> ProfileBook.changeset(%{})
     |> Ecto.Changeset.put_assoc(:profile, profile)
     |> Ecto.Changeset.put_assoc(:book, book)
     |> Repo.insert(
       on_conflict: :nothing,
       conflict_target: [:profile_id, :book_id]
     )
+  end
+
+  def update_profile_book(%ProfileBook{} = profile_book, attrs) do
+    profile_book
+    |> ProfileBook.changeset(attrs)
+    |> Repo.update()
   end
 
   def delete_profile_book(%ProfileBook{} = profile_book) do

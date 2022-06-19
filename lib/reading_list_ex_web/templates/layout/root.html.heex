@@ -7,8 +7,10 @@
       phx-track-static
       rel="icon"
       href={Routes.static_path(@conn, "/images/icons8-book-color-16.png")}
-    /> <%= live_title_tag(assigns[:page_title] || "ReadingListEx") %>
+    /> <%= live_title_tag(assigns[:page_title] || "Reading List Ex") %>
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")} />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet">
     <script
       defer
       phx-track-static
@@ -17,7 +19,7 @@
     >
     </script>
   </head>
-  
+
   <body class="flex flex-col min-h-screen">
     <div class="relative bg-white">
       <div class="mx-auto px-4 sm:px-6">
@@ -25,7 +27,7 @@
           <div class="flex justify-start text-2xl text-indigo-700 md:flex-1 lg:w-0">
             <a href="/">Reading List <i>EX</i></a>
           </div>
-          
+
           <div class="justify-center md:flex-1 lg:w-0">
             <nav class="justify-center">
               <%= form_for @conn, Routes.search_path(@conn, :index), [method: :get], fn f -> %>
@@ -38,19 +40,19 @@
               <% end %>
             </nav>
           </div>
-          
+
           <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
             <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
               <div class="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-900">
                 <%= link("LiveDashboard", to: Routes.live_dashboard_path(@conn, :home)) %>
               </div>
             <% end %>
-             <%= render("_user_menu.html", assigns) %>
+            <%= render("_user_menu.html", assigns) %>
           </div>
         </div>
       </div>
     </div>
-     <%= @inner_content %>
+    <%= @inner_content %>
     <footer class="bg-gray-50">
       <div class="max-w-screen-xl px-4 py-8 mx-auto space-y-10 sm:px-6 lg:px-8">
         <div class="sm:items-center sm:justify-between sm:flex">
@@ -72,10 +74,10 @@
             </a>
           </div>
         </div>
-        
+
         <div class="justify-end text-sm text-gray-500">
           <p>Website by Corbin Olsen</p>
-          
+
           <p>Icons from <a class="underline" href="https://icons8.com">icons8.com</a></p>
         </div>
       </div>
