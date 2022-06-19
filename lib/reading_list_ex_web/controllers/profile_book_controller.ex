@@ -2,7 +2,7 @@ defmodule ReadingListExWeb.ProfileBooksController do
   use ReadingListExWeb, :controller
 
   alias ReadingListEx.Library
-  alias ReadingListEx.Library.{Book, ProfileBook}
+  alias ReadingListEx.Library.{Book}
 
   def index(conn, _params) do
     profile = conn.assigns.current_profile

@@ -32,18 +32,6 @@
                      class: "py-2 pl-2 pr-8 text-xs font-medium border-gray-200 rounded-md hover:z-10 focus:outline-none focus:border-indigo-600 focus:z-10 hover:bg-gray-50 focus:ring-0",
                      onchange: "this.form.submit()") %>
           <% end %>
-            <!--<select
-              class="py-2 pl-2 pr-8 text-xs font-medium border-gray-200 rounded-md hover:z-10 focus:outline-none focus:border-indigo-600 focus:z-10 hover:bg-gray-50 focus:ring-0"
-              id="status"
-              name="status"
-              val
-            >
-              <option>Status</option>
-              <option value="reading">Reading</option>
-              <option value="backlog">Backlog</option>
-              <option value="read">Read</option>
-              <option value="dnf">Did Not Finish</option>
-            </select>-->
           </div>
         </td>
 
@@ -53,22 +41,9 @@
               to: Routes.profile_books_path(@conn, :delete, book.id),
               method: :delete,
               class:
-                "inline-block p-2 text-indigo-600 border border-indigo-600 rounded-full hover:text-white hover:bg-indigo-600 active:bg-indigo-500 focus:outline-none focus:ring"
+                "grid items-center justify-center text-indigo-600 border border-indigo-600 rounded-full hover:text-white hover:bg-indigo-600 active:bg-indigo-500 focus:outline-none focus:ring"
             ) do %>
-              <svg
-                class="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="m12 10.93 5.719-5.72c.146-.146.339-.219.531-.219.404 0 .75.324.75.749 0 .193-.073.385-.219.532l-5.72 5.719 5.719 5.719c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.385-.073-.531-.219l-5.719-5.719-5.719 5.719c-.146.146-.339.219-.531.219-.401 0-.75-.323-.75-.75 0-.192.073-.384.22-.531l5.719-5.719-5.72-5.719c-.146-.147-.219-.339-.219-.532 0-.425.346-.749.75-.749.192 0 .385.073.531.219z"
-                />
-              </svg>
+              <span class="m-2 material-symbols-outlined">close</span>
             <% end %>
           </span>
         </td>
