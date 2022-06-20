@@ -11,7 +11,7 @@
     <%= link("Log out", to: Routes.user_session_path(@conn, :delete), method: :delete) %>
   </div>
 <% else %>
-  <div class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+  <div class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-400 dark:hover:bg-indigo-300">
     <%= link("Register", to: Routes.user_registration_path(@conn, :new)) %>
   </div>
 

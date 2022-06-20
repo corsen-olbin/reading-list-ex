@@ -5,7 +5,7 @@
       for={@conn}
       action={Routes.user_session_path(@conn, :create)}
       as={:user}
-      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      class="bg-white dark:bg-slate-700 shadow-md rounded px-8 pt-6 pb-8 mb-4"
     >
       <%= if @error_message do %>
         <div class="alert alert-danger">
@@ -14,33 +14,33 @@
       <% end %>
 
       <div class="mb-6">
-        <%= label(f, :email, class: "block text-gray-700 text-sm font-bold mb-2") %> <%= email_input(
+        <%= label(f, :email, class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400") %> <%= email_input(
           f,
           :email,
           required: true,
           class:
-            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-slate-700 dark:text-gray-400"
         ) %>
       </div>
 
       <div class="mb-6">
-        <%= label(f, :password, class: "block text-gray-700 text-sm font-bold mb-2") %> <%= password_input(
+        <%= label(f, :password, class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400") %> <%= password_input(
           f,
           :password,
           required: true,
           class:
-            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-slate-700 dark:text-gray-400"
         ) %>
       </div>
 
       <div class="flex items-center justify-between">
         <%= submit("Log in",
           class:
-            "bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            "bg-indigo-600  dark:bg-indigo-400 dark:hover:bg-indigo-300 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         ) %> <%= link("Forgot your password?",
           to: Routes.user_reset_password_path(@conn, :new),
           class:
-            "inline-block align-baseline font-bold text-sm text-indigo-600 hover:text-blue-800"
+            "inline-block align-baseline font-bold text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-300"
         ) %>
       </div>
     </.form>

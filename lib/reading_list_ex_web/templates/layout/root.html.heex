@@ -20,11 +20,11 @@
     </script>
   </head>
 
-  <body class="flex flex-col min-h-screen">
-    <div class="relative bg-white">
+  <body class="flex flex-col min-h-screen dark:bg-slate-800 dark:text-white">
+    <div class="relative  ">
       <div class="mx-auto px-4 sm:px-6">
-        <div class="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
-          <div class="flex justify-start text-2xl text-indigo-700 md:flex-1 lg:w-0">
+        <div class="flex justify-between items-center py-6 md:justify-start md:space-x-10">
+          <div class="flex justify-start text-2xl text-indigo-700 dark:text-indigo-400 md:flex-1 lg:w-0">
             <a href="/">Reading List <i>EX</i></a>
           </div>
 
@@ -34,7 +34,8 @@
                 <div class="hidden w-full md:flex">
                   <%= search_input(f, :query,
                     class:
-                      "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700  leading-tight focus:outline-none focus:shadow-outline dark:bg-slate-700 dark:text-gray-400",
+                    placeholder: "Search for your next read..."
                   ) %>
                 </div>
               <% end %>
@@ -53,7 +54,7 @@
       </div>
     </div>
     <%= @inner_content %>
-    <footer class="bg-gray-50">
+    <footer class="bg-gray-50 dark:bg-slate-800">
       <div class="max-w-screen-xl px-4 py-8 mx-auto space-y-10 sm:px-6 lg:px-8">
         <div class="sm:items-center sm:justify-between sm:flex">
           <div class="flex mt-8 space-x-6 text-gray-500 sm:mt-0">
