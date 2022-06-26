@@ -1,22 +1,22 @@
-<table class="table-auto w-4/5 mx-auto justify-center text-sm divide-y divide-gray-200">
+<table class="table-auto w-4/5 mx-auto justify-center text-sm divide-y divide-gray-200  dark:text-gray-200 divide-y divide-gray-200 dark:divide-gray-400 text-gray-900 dark:text-gray-200">
   <thead>
     <tr>
-      <th class="p-4 font-medium text-left text-gray-900 whitespace-nowrap">Isbn 13</th>
+      <th class="p-4 font-medium text-left whitespace-nowrap">Isbn 13</th>
 
-      <th class="p-4 font-medium text-left text-gray-900 whitespace-nowrap">Title</th>
+      <th class="p-4 font-medium text-left whitespace-nowrap">Title</th>
 
-      <th class="p-4 font-medium text-left text-gray-900 whitespace-nowrap">Status</th>
+      <th class="p-4 font-medium text-left whitespace-nowrap">Status</th>
 
       <th></th>
     </tr>
   </thead>
 
-  <tbody class="divide-y divide-gray-100">
+  <tbody class="divide-y divide-gray-100 dark:divide-gray-400 text-gray-900 dark:text-gray-200">
     <%= for book <- @books do %>
       <tr>
-        <td class="p-4 font-medium text-gray-900 whitespace-nowrap"><%= book.book.isbn_13 %></td>
+        <td class="p-4 font-medium whitespace-nowrap"><%= book.book.isbn_13 %></td>
 
-        <td class="p-4 font-medium text-gray-900 whitespace-nowrap"><%= book.book.title %></td>
+        <td class="p-4 font-medium whitespace-nowrap"><%= book.book.title %></td>
 
         <td class="p-4 mx-auto">
           <div class=" text-xs rounded-md">
@@ -29,7 +29,7 @@
                      [key: "Read", value: "read"],
                      [key: "Did Not Finish", value: "dnf"]],
                      selected: Atom.to_string(book.status),
-                     class: "py-2 pl-2 pr-8 text-xs font-medium border-gray-200 rounded-md hover:z-10 focus:outline-none focus:border-indigo-600 focus:z-10 hover:bg-gray-50 focus:ring-0",
+                     class: "py-2 pl-2 pr-8 text-xs font-medium border-gray-200 rounded-md hover:z-10 focus:outline-none focus:border-indigo-600 dark:focus:border-indigo-400 focus:z-10 hover:dark:bg-slate-850 focus:ring-0 dark:bg-slate-800",
                      onchange: "this.form.submit()") %>
           <% end %>
           </div>
@@ -41,7 +41,7 @@
               to: Routes.profile_books_path(@conn, :delete, book.id),
               method: :delete,
               class:
-                "grid items-center justify-center text-indigo-600 border border-indigo-600 rounded-full hover:text-white hover:bg-indigo-600 active:bg-indigo-500 focus:outline-none focus:ring"
+                "grid items-center justify-center text-indigo-600 dark:text-indigo-400 border border-indigo-600 dark:border-indigo-400 rounded-full hover:text-white hover:bg-indigo-600 dark:hover:bg-indigo-400 active:bg-indigo-500 focus:outline-none focus:ring"
             ) do %>
               <span class="m-2 material-symbols-outlined">close</span>
             <% end %>
