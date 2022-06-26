@@ -5,7 +5,7 @@
       for={@password_changeset}
       action={Routes.user_settings_path(@conn, :update)}
       id="update_password"
-      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      class="bg-white dark:bg-slate-700 shadow-md rounded px-8 pt-6 pb-8 mb-4"
     >
       <%= if @password_changeset.action do %>
         <div class="alert alert-danger">
@@ -15,41 +15,41 @@
       <%= hidden_input(f, :action, name: "action", value: "update_password") %>
       <div class="mb-6">
         <%= label(f, :password, "New password",
-          class: "block text-gray-700 text-sm font-bold mb-2"
+          class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400"
         ) %> <%= password_input(f, :password,
           required: true,
           class:
-            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-slate-700 dark:text-gray-400"
         ) %> <%= error_tag(f, :password) %>
       </div>
 
       <div class="mb-6">
         <%= label(f, :password_confirmation, "Confirm new password",
-          class: "block text-gray-700 text-sm font-bold mb-2"
+          class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400"
         ) %> <%= password_input(f, :password_confirmation,
           required: true,
           class:
-            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-slate-700 dark:text-gray-400"
         ) %> <%= error_tag(f, :password_confirmation) %>
       </div>
 
       <div class="mb-6">
         <%= label(f, :current_password,
           for: "current_password_for_password",
-          class: "block text-gray-700 text-sm font-bold mb-2"
+          class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400"
         ) %> <%= password_input(f, :current_password,
           required: true,
           name: "current_password",
           id: "current_password_for_password",
           class:
-            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-slate-700 dark:text-gray-400"
         ) %> <%= error_tag(f, :current_password) %>
       </div>
 
       <div>
         <%= submit("Change Password",
           class:
-            "bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            "bg-indigo-600 dark:bg-indigo-400 dark:hover:bg-indigo-300 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         ) %>
       </div>
     </.form>
@@ -61,7 +61,7 @@
       for={@email_changeset}
       action={Routes.user_settings_path(@conn, :update)}
       id="update_email"
-      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      class="bg-white dark:bg-slate-700 shadow-md rounded px-8 pt-6 pb-8 mb-4"
     >
       <%= if @email_changeset.action do %>
         <div class="alert alert-danger">
@@ -70,32 +70,32 @@
       <% end %>
       <%= hidden_input(f, :action, name: "action", value: "update_email") %>
       <div class="mb-6">
-        <%= label(f, :email, class: "block text-gray-700 text-sm font-bold mb-2") %> <%= email_input(
+        <%= label(f, :email, class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400") %> <%= email_input(
           f,
           :email,
           required: true,
           class:
-            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-slate-700 dark:text-gray-400"
         ) %> <%= error_tag(f, :email) %>
       </div>
 
       <div class="mb-6">
         <%= label(f, :current_password,
           for: "current_password_for_email",
-          class: "block text-gray-700 text-sm font-bold mb-2"
+          class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400"
         ) %> <%= password_input(f, :current_password,
           required: true,
           name: "current_password",
           id: "current_password_for_email",
           class:
-            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-slate-700 dark:text-gray-400"
         ) %> <%= error_tag(f, :current_password) %>
       </div>
 
       <div>
         <%= submit("Change Email",
           class:
-            "bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            "bg-indigo-600 dark:bg-indigo-400 dark:hover:bg-indigo-300 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         ) %>
       </div>
     </.form>
@@ -107,7 +107,7 @@
       for={@profile_changeset}
       action={Routes.user_settings_path(@conn, :update)}
       id="update_profile"
-      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      class="bg-white dark:bg-slate-700 shadow-md rounded px-8 pt-6 pb-8 mb-4"
     >
       <%= if @profile_changeset.action do %>
         <div class="alert alert-danger">
@@ -116,45 +116,45 @@
       <% end %>
       <%= hidden_input(f, :book, name: "book", value: "update_profile") %>
       <div class="mb-6">
-        <%= label(f, :first_name, class: "block text-gray-700 text-sm font-bold mb-2") %> <%= text_input(
+        <%= label(f, :first_name, class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400") %> <%= text_input(
           f,
           :first_name,
           class:
-            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-slate-700 dark:text-gray-400"
         ) %> <%= error_tag(f, :first_name) %>
       </div>
 
       <div class="mb-6">
-        <%= label(f, :last_name, class: "block text-gray-700 text-sm font-bold mb-2") %> <%= text_input(
+        <%= label(f, :last_name, class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400") %> <%= text_input(
           f,
           :last_name,
           class:
-            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-slate-700 dark:text-gray-400"
         ) %> <%= error_tag(f, :last_name) %>
       </div>
 
       <div class="mb-6">
-        <%= label(f, :username, class: "block text-gray-700 text-sm font-bold mb-2") %> <%= text_input(
+        <%= label(f, :username, class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400") %> <%= text_input(
           f,
           :username,
           class:
-            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-slate-700 dark:text-gray-400"
         ) %> <%= error_tag(f, :username) %>
       </div>
 
       <div class="mb-6">
-        <%= label(f, :favorite_genre, class: "block text-gray-700 text-sm font-bold mb-2") %> <%= text_input(
+        <%= label(f, :favorite_genre, class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400") %> <%= text_input(
           f,
           :favorite_genre,
           class:
-            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-slate-700 dark:text-gray-400"
         ) %> <%= error_tag(f, :favorite_genre) %>
       </div>
 
       <div>
         <%= submit("Save Profile",
           class:
-            "bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            "bg-indigo-600 dark:bg-indigo-400 dark:hover:bg-indigo-300 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         ) %>
       </div>
     </.form>
