@@ -14,7 +14,9 @@
       <% end %>
 
       <div class="mb-6">
-        <%= label(f, :email, class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400") %> <%= email_input(
+        <%= label(f, :email,
+          class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400"
+        ) %> <%= email_input(
           f,
           :email,
           required: true,
@@ -24,7 +26,9 @@
       </div>
 
       <div class="mb-6">
-        <%= label(f, :password, class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400") %> <%= password_input(
+        <%= label(f, :password,
+          class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400"
+        ) %> <%= password_input(
           f,
           :password,
           required: true,

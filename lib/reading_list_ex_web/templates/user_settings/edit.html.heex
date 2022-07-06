@@ -70,7 +70,9 @@
       <% end %>
       <%= hidden_input(f, :action, name: "action", value: "update_email") %>
       <div class="mb-6">
-        <%= label(f, :email, class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400") %> <%= email_input(
+        <%= label(f, :email,
+          class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400"
+        ) %> <%= email_input(
           f,
           :email,
           required: true,
@@ -116,7 +118,9 @@
       <% end %>
       <%= hidden_input(f, :book, name: "book", value: "update_profile") %>
       <div class="mb-6">
-        <%= label(f, :first_name, class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400") %> <%= text_input(
+        <%= label(f, :first_name,
+          class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400"
+        ) %> <%= text_input(
           f,
           :first_name,
           class:
@@ -125,7 +129,9 @@
       </div>
 
       <div class="mb-6">
-        <%= label(f, :last_name, class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400") %> <%= text_input(
+        <%= label(f, :last_name,
+          class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400"
+        ) %> <%= text_input(
           f,
           :last_name,
           class:
@@ -134,7 +140,9 @@
       </div>
 
       <div class="mb-6">
-        <%= label(f, :username, class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400") %> <%= text_input(
+        <%= label(f, :username,
+          class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400"
+        ) %> <%= text_input(
           f,
           :username,
           class:
@@ -143,7 +151,9 @@
       </div>
 
       <div class="mb-6">
-        <%= label(f, :favorite_genre, class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400") %> <%= text_input(
+        <%= label(f, :favorite_genre,
+          class: "block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400"
+        ) %> <%= text_input(
           f,
           :favorite_genre,
           class:
