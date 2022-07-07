@@ -7,6 +7,8 @@ defmodule ReadingListEx.Library.Book do
     field :title, :string
     field :subtitle, :string
     field :google_api_id, :string
+    field :image_url, :string
+    field :authors, :string
 
     has_many :profile_book, ReadingListEx.Library.ProfileBook
 
@@ -19,7 +21,7 @@ defmodule ReadingListEx.Library.Book do
   @doc false
   def changeset(book, attrs) do
     book
-    |> cast(attrs, [:isbn_13, :title, :subtitle, :google_api_id])
+    |> cast(attrs, [:isbn_13, :title, :subtitle, :google_api_id, :image_url, :authors])
     |> validate_required([:isbn_13, :title, :google_api_id])
   end
 end
