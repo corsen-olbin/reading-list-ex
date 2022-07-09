@@ -1,5 +1,5 @@
 
-      <table class="table-auto w-4/5 mx-auto justify-center text-sm text-gray-900 dark:text-gray-200 divide-y divide-gray-200 dark:divide-gray-400">
+      <table class="table-auto w-4/5 mx-auto justify-center text-sm text-gray-900 dark:text-gray-200 divide-y divide-gray-200 dark:divide-gray-600">
         <thead>
           <tr>
             <th scope="col" class="relative px-6 py-3">
@@ -14,7 +14,7 @@
             </th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-gray-200 dark:divide-gray-400 text-gray-900 dark:text-gray-200">
+        <tbody class="divide-y divide-gray-200 dark:divide-gray-600 text-gray-900 dark:text-gray-200">
         <%= for book <- @books["items"] do %>
           <tr class="my-4">
             <td>
@@ -24,7 +24,7 @@
                   <%= book["volumeInfo"]["title"] %>
             </td>
             <td class="p-4 font-medium whitespace-nowrap">
-              <%= book["volumeInfo"]["authors"] %>
+              <%= join_author_names(book["volumeInfo"]["authors"]) %>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
               <%= form_for @conn, Routes.profile_books_path(@conn, :create), fn f -> %>

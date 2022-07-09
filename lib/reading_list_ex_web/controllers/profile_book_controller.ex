@@ -87,7 +87,9 @@ defmodule ReadingListExWeb.ProfileBooksController do
       isbn_13: isbn_13,
       title: book_params["volumeInfo"]["title"],
       subtitle: book_params["volumeInfo"]["subtitle"],
-      google_api_id: book_params["id"]
+      google_api_id: book_params["id"],
+      image_url: book_params["volumeInfo"]["imageLinks"]["smallThumbnail"],
+      authors: Enum.join(book_params["volumeInfo"]["authors"], ";")
     }
   end
 end
