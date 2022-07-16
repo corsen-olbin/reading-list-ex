@@ -88,7 +88,7 @@ defmodule ReadingListExWeb.ProfileBooksController do
       title: book_params["volumeInfo"]["title"],
       subtitle: book_params["volumeInfo"]["subtitle"],
       google_api_id: book_params["id"],
-      image_url: book_params["volumeInfo"]["imageLinks"]["smallThumbnail"],
+      image_url: "https" <> String.trim_leading(book_params["volumeInfo"]["imageLinks"]["smallThumbnail"], "http"),
       authors: Enum.join(book_params["volumeInfo"]["authors"], ";")
     }
   end
