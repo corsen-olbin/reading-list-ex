@@ -19,7 +19,7 @@
     <%= for book <- @books do %>
       <tr>
         <td>
-          <%= tag(:img, src: book.book.image_url, class: "w-20", alt: "book") %>
+          <%= tag(:img, src: book.book.image_url || Routes.static_path(@conn, "/images/128px-Placeholder_book.svg.png"), class: "w-20", alt: "book") %>
         </td>
         <td class="p-4 font-medium whitespace-nowrap"><%= book.book.isbn_13 %></td>
 

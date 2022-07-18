@@ -24,8 +24,9 @@ defmodule ReadingListExWeb.ProfileBooksController do
       nil ->
         Library.create_book(convert_params_to_book(book, isbn_13_type["identifier"]))
 
-      book ->
-        {:ok, book}
+      existing_book ->
+        update_existing_if_old(existing_book, book, isbn_13_type["identifier"])
+        {:ok, existing_book}
     end
     |> case do
       {:ok, book = %Book{}} ->
@@ -88,8 +89,20 @@ defmodule ReadingListExWeb.ProfileBooksController do
       title: book_params["volumeInfo"]["title"],
       subtitle: book_params["volumeInfo"]["subtitle"],
       google_api_id: book_params["id"],
-      image_url: book_params["volumeInfo"]["imageLinks"]["smallThumbnail"],
+      image_url: change_to_https(book_params["volumeInfo"]["imageLinks"]["smallThumbnail"]),
       authors: Enum.join(book_params["volumeInfo"]["authors"], ";")
     }
+  end
+
+  defp change_to_https("http://" <> rest_url), do: "https://" <> rest_url
+  defp change_to_https(url), do: url
+
+  defp update_existing_if_old(existing_book, book, isbn_13) do
+    IO.inspect(existing_book, label: "existing_book")
+    IO.inspect(DateTime.utc_now(), label: "utc now")
+    case existing_book.updated_at < DateTime.utc_now() do
+      true -> Library.update_book(existing_book, convert_params_to_book(book, isbn_13))
+      false -> {:ok, existing_book}
+    end
   end
 end
