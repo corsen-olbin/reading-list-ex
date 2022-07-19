@@ -18,7 +18,7 @@
         <%= for book <- @books["items"] do %>
           <tr class="my-4">
             <td>
-              <img class="w-20" src="<%= book["volumeInfo"]["imageLinks"]["smallThumbnail"] %>" alt="book"/>
+              <%= tag(:img, src: change_to_https(book["volumeInfo"]["imageLinks"]["smallThumbnail"]), class: "w-20", alt: "book") %>
             </td>
             <td class="p-4 font-medium whitespace-nowrap">
                   <%= book["volumeInfo"]["title"] %>

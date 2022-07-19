@@ -7,4 +7,7 @@ defmodule ReadingListExWeb.SearchView do
     authors_list
     |> Enum.join(", ")
   end
+
+  def change_to_https("http://" <> rest_url), do: "https://" <> rest_url
+  def change_to_https(url), do: url
 end
