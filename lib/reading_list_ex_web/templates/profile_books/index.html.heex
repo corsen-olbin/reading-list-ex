@@ -4,25 +4,32 @@
       <th></th>
       
       <th class="p-4 font-medium text-left whitespace-nowrap">Isbn 13</th>
-
+      
       <th class="p-4 font-medium text-left whitespace-nowrap">Title</th>
-
+      
       <th class="p-4 font-medium text-left">Author(s)</th>
-
+      
       <th class="p-4 font-medium text-left whitespace-nowrap">Status</th>
-
+      
       <th></th>
     </tr>
   </thead>
-
+  
   <tbody class="divide-y divide-gray-100 dark:divide-gray-600 text-gray-900 dark:text-gray-200">
     <%= for book <- @books do %>
       <tr>
         <td>
-          <%= tag(:img, src: change_to_https(book.book.image_url) || Routes.static_path(@conn, "/images/128px-Placeholder_book.svg.png"), class: "w-20", alt: "book") %>
+          <%= tag(:img,
+            src:
+              change_to_https(book.book.image_url) ||
+                Routes.static_path(@conn, "/images/128px-Placeholder_book.svg.png"),
+            class: "w-20",
+            alt: "book"
+          ) %>
         </td>
+        
         <td class="p-4 font-medium whitespace-nowrap"><%= book.book.isbn_13 %></td>
-
+        
         <td class="p-4 font-medium whitespace-nowrap"><%= book.book.title %></td>
         
         <td class="p-4 font-medium"><%= separate_author_names(book.book.authors) %></td>
@@ -48,7 +55,7 @@
             <% end %>
           </div>
         </td>
-
+        
         <td>
           <span class="grid justify-center mx-auto">
             <%= link(

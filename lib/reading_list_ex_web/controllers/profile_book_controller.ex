@@ -83,6 +83,28 @@ defmodule ReadingListExWeb.ProfileBooksController do
     |> redirect(to: Routes.profile_books_path(conn, :index))
   end
 
+  def delete(conn, %{"google_id" => google_id, "query" => query}) do
+    profile = conn.assigns.current_profile
+
+    profile_book =
+      Library.get_profile_book_by_profile_and_google_id(profile, google_id)
+      |> Enum.to_list()
+      |> List.first()
+
+    case profile_book do
+      profile_book when profile_book.profile_id == profile.id ->
+        Library.delete_profile_book(profile_book)
+
+        conn
+        |> put_flash(:info, "Book removed from Library.")
+
+      _ ->
+        conn
+        |> put_flash(:info, "Failed to remove book from Library.")
+    end
+    |> redirect(to: Routes.search_path(conn, :index, %{"query" => query}))
+  end
+
   defp convert_params_to_book(book_params, isbn_13) do
     %{
       isbn_13: isbn_13,
@@ -100,6 +122,7 @@ defmodule ReadingListExWeb.ProfileBooksController do
   defp update_existing_if_old(existing_book, book, isbn_13) do
     IO.inspect(existing_book, label: "existing_book")
     IO.inspect(DateTime.utc_now(), label: "utc now")
+
     case existing_book.updated_at < DateTime.utc_now() do
       true -> Library.update_book(existing_book, convert_params_to_book(book, isbn_13))
       false -> {:ok, existing_book}
