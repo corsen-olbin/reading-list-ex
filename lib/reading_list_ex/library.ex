@@ -10,12 +10,12 @@ defmodule ReadingListEx.Library do
 
   @doc """
   Returns the list of profiles.
-
+  
   ## Examples
-
+  
       iex> list_profiles()
       [%Profile{}, ...]
-
+  
   """
   def list_profiles do
     Repo.all(Profile)
@@ -23,17 +23,17 @@ defmodule ReadingListEx.Library do
 
   @doc """
   Gets a single profile.
-
+  
   Raises `Ecto.NoResultsError` if the Profile does not exist.
-
+  
   ## Examples
-
+  
       iex> get_profile!(123)
       %Profile{}
-
+  
       iex> get_profile!(456)
       ** (Ecto.NoResultsError)
-
+  
   """
   def get_profile!(id), do: Repo.get!(Profile, id)
 
@@ -48,15 +48,15 @@ defmodule ReadingListEx.Library do
 
   @doc """
   Creates a profile.
-
+  
   ## Examples
-
+  
       iex> create_profile(%{field: value})
       {:ok, %Profile{}}
-
+  
       iex> create_profile(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
-
+  
   """
   def create_profile(attrs \\ %{}) do
     %Profile{}
@@ -66,15 +66,15 @@ defmodule ReadingListEx.Library do
 
   @doc """
   Updates a profile.
-
+  
   ## Examples
-
+  
       iex> update_profile(profile, %{field: new_value})
       {:ok, %Profile{}}
-
+  
       iex> update_profile(profile, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
-
+  
   """
   def update_profile(%Profile{} = profile, attrs) do
     profile
@@ -84,15 +84,15 @@ defmodule ReadingListEx.Library do
 
   @doc """
   Deletes a profile.
-
+  
   ## Examples
-
+  
       iex> delete_profile(profile)
       {:ok, %Profile{}}
-
+  
       iex> delete_profile(profile)
       {:error, %Ecto.Changeset{}}
-
+  
   """
   def delete_profile(%Profile{} = profile) do
     Repo.delete(profile)
@@ -100,12 +100,12 @@ defmodule ReadingListEx.Library do
 
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking profile changes.
-
+  
   ## Examples
-
+  
       iex> change_profile(profile)
       %Ecto.Changeset{data: %Profile{}}
-
+  
   """
   def change_profile(%Profile{} = profile, attrs \\ %{}) do
     Profile.changeset(profile, attrs)
@@ -115,12 +115,12 @@ defmodule ReadingListEx.Library do
 
   @doc """
   Returns the list of books.
-
+  
   ## Examples
-
+  
       iex> list_books()
       [%Book{}, ...]
-
+  
   """
   def list_books do
     Repo.all(Book)
@@ -128,47 +128,47 @@ defmodule ReadingListEx.Library do
 
   @doc """
   Gets a single book.
-
+  
   Raises `Ecto.NoResultsError` if the Book does not exist.
-
+  
   ## Examples
-
+  
       iex> get_book!(123)
       %Book{}
-
+  
       iex> get_book!(456)
       ** (Ecto.NoResultsError)
-
+  
   """
   def get_book!(id), do: Repo.get!(Book, id)
 
   @doc """
   Gets a single book by google_api_id
-
+  
   Returns nil if the Book does not exist.
-
+  
   ## Examples
-
+  
       iex> get_book_by_isbn13(123)
       %Book{}
-
+  
       iex> get_book_by_isbn13(456)
       nil
-
+  
   """
   def get_book_by_google_api_id(google_id), do: Repo.get_by(Book, google_api_id: google_id)
 
   @doc """
   Creates a book.
-
+  
   ## Examples
-
+  
       iex> create_book(%{field: value})
       {:ok, %Book{}}
-
+  
       iex> create_book(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
-
+  
   """
   def create_book(attrs \\ %{}) do
     %Book{}
@@ -178,15 +178,15 @@ defmodule ReadingListEx.Library do
 
   @doc """
   Updates a book.
-
+  
   ## Examples
-
+  
       iex> update_book(book, %{field: new_value})
       {:ok, %Book{}}
-
+  
       iex> update_book(book, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
-
+  
   """
   def update_book(%Book{} = book, attrs) do
     book
@@ -196,15 +196,15 @@ defmodule ReadingListEx.Library do
 
   @doc """
   Deletes a book.
-
+  
   ## Examples
-
+  
       iex> delete_book(book)
       {:ok, %Book{}}
-
+  
       iex> delete_book(book)
       {:error, %Ecto.Changeset{}}
-
+  
   """
   def delete_book(%Book{} = book) do
     Repo.delete(book)
@@ -212,12 +212,12 @@ defmodule ReadingListEx.Library do
 
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking book changes.
-
+  
   ## Examples
-
+  
       iex> change_book(book)
       %Ecto.Changeset{data: %Book{}}
-
+  
   """
   def change_book(%Book{} = book, attrs \\ %{}) do
     Book.changeset(book, attrs)
@@ -227,17 +227,17 @@ defmodule ReadingListEx.Library do
 
   @doc """
   Gets a single book.
-
+  
   Raises `Ecto.NoResultsError` if the Book does not exist.
-
+  
   ## Examples
-
+  
       iex> get_book!(123)
       %Book{}
-
+  
       iex> get_book!(456)
       ** (Ecto.NoResultsError)
-
+  
   """
   def get_profile_book(id), do: Repo.get(ProfileBook, id)
 
@@ -252,17 +252,41 @@ defmodule ReadingListEx.Library do
     Repo.all(query)
   end
 
+  def get_profile_books_by_profile_and_google_ids(profile, google_id_list) do
+    query =
+      from profile_book in ProfileBook,
+        inner_join: b in Book,
+        on: b.id == profile_book.book_id,
+        where: [profile_id: ^profile.id],
+        where: b.google_api_id in ^google_id_list,
+        select: b.google_api_id
+
+    Repo.all(query)
+  end
+
+  def get_profile_book_by_profile_and_google_id(profile, google_id) do
+    query =
+      from profile_book in ProfileBook,
+        inner_join: b in Book,
+        on: b.id == profile_book.book_id,
+        where: [profile_id: ^profile.id],
+        where: b.google_api_id == ^google_id,
+        select: profile_book
+
+    Repo.all(query)
+  end
+
   @doc """
   Creates a profile.
-
+  
   ## Examples
-
+  
       iex> create_profile_book(%{field: value})
       {:ok, %ProfileBook{}}
-
+  
       iex> create_profile(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
-
+  
   """
   def create_profile_book(%Profile{} = profile, %Book{} = book) do
     %ProfileBook{}
