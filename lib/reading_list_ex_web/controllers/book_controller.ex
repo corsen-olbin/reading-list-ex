@@ -28,8 +28,13 @@ defmodule ReadingListExWeb.BookController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    book = Library.get_book!(id)
+  def show(conn, %{"google_id" => google_id}) do
+    profile = conn.assigns.current_profile
+
+    {:ok, book} = ReadingListEx.GoogleAPIHelper.query_book(google_id)
+    profile_book = Library.get_profile_book_by_profile_and_google_id(profile.id, google_id)
+
+    book = Map.put(book, "profile_info", profile_book)
     render(conn, "show.html", book: book)
   end
 
