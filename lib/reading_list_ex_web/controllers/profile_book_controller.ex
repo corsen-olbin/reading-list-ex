@@ -30,6 +30,7 @@ defmodule ReadingListExWeb.ProfileBooksController do
     end
     |> case do
       {:ok, book = %Book{}} ->
+        ReadingListExWeb.Endpoint.broadcast("books:live", "books", %{uid: "1", body: "The Reckoning"})
         Library.create_profile_book(profile, book)
 
       error ->
@@ -37,6 +38,7 @@ defmodule ReadingListExWeb.ProfileBooksController do
     end
     |> case do
       {:ok, _} ->
+
         conn
         |> put_flash(:info, "Book added to Library successfully.")
         |> redirect(to: Routes.search_path(conn, :index, %{"query" => query}))
@@ -46,6 +48,8 @@ defmodule ReadingListExWeb.ProfileBooksController do
         |> put_flash(:info, "Failed to add Book to Library.")
         |> redirect(to: Routes.search_path(conn, :index, %{"query" => query}))
     end
+
+
   end
 
   def update(conn, %{"id" => id, "status" => new_status}) do
