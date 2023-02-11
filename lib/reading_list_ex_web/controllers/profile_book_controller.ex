@@ -30,7 +30,7 @@ defmodule ReadingListExWeb.ProfileBooksController do
     end
     |> case do
       {:ok, book = %Book{}} ->
-        ReadingListExWeb.Endpoint.broadcast("books:live", "books", %{uid: "1", body: "The Reckoning"})
+        ReadingListExWeb.Endpoint.broadcast("books:live", "books", %{uid: "1", body: book.title})
         Library.create_profile_book(profile, book)
 
       error ->

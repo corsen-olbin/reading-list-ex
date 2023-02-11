@@ -4,17 +4,29 @@ defmodule ReadingListExWeb.BookFeedLive do
   @topic "books:live"
 
   def render(assigns) do
-    Phoenix.View.render(MyAppWeb.PageView, "page.html", assigns)
+    ~H"""
+    <h1>Books</h1>
+    <table>
+
+      <tbody>
+      <%= for book <- @books do %>
+        <tr>
+          <td><%= book.body %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    """
   end
 
   def mount(_params, _session, socket) do
-    ReadingListExWeb.Endpoint.subscribe("books:live")
+    ReadingListExWeb.Endpoint.subscribe(@topic)
 
     {:ok, assign(socket, books: [])}
   end
 
   def handle_info(%{topic: @topic, payload: state}, socket) do
-    IO.puts "HANDLE BROADCAST FOR #{state[:status]}"
-    {:noreply, assign(socket, state)}
+    IO.puts "HANDLE BROADCAST FOR #{state.body}"
+    {:noreply, assign(socket, books: [state | socket.assigns.books])}
   end
 end

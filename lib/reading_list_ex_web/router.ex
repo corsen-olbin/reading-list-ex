@@ -24,6 +24,7 @@ defmodule ReadingListExWeb.Router do
     get "/search", SearchController, :index
     resources "/books", BookController, only: [:index, :show]
     resources "/profiles", ProfilesController, only: [:index, :show]
+    live "/bookslive", BookFeedLive
   end
 
   # Other scopes may use custom stacks.
