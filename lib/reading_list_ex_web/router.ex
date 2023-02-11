@@ -22,7 +22,7 @@ defmodule ReadingListExWeb.Router do
 
     get "/", PageController, :index
     get "/search", SearchController, :index
-    resources "/books", BookController, only: [:index, :show]
+    resources "/books", BookController, only: [:show], param: "google_id"
     resources "/profiles", ProfilesController, only: [:index, :show]
     live "/bookslive", BookFeedLive
   end

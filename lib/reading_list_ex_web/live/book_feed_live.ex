@@ -26,7 +26,7 @@ defmodule ReadingListExWeb.BookFeedLive do
   end
 
   def handle_info(%{topic: @topic, payload: state}, socket) do
-    IO.puts "HANDLE BROADCAST FOR #{state.body}"
-    {:noreply, assign(socket, books: [state | socket.assigns.books])}
+    remaining = Enum.take(socket.assigns.books, 4)
+    {:noreply, assign(socket, books: [state | remaining])}
   end
 end

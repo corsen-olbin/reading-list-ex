@@ -4,11 +4,6 @@ defmodule ReadingListExWeb.BookController do
   alias ReadingListEx.Library
   alias ReadingListEx.Library.Book
 
-  def index(conn, _params) do
-    books = Library.list_books()
-    render(conn, "index.html", books: books)
-  end
-
   def new(conn, _params) do
     changeset = Library.change_book(%Book{})
     render(conn, "new.html", changeset: changeset)
@@ -28,9 +23,10 @@ defmodule ReadingListExWeb.BookController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    book = Library.get_book!(id)
-    render(conn, "show.html", book: book)
+  def show(conn, %{"google_id" => google_id}) do
+    book_ex = Library.get_book_by_google_api_id(google_id)
+    {:ok, book} = ReadingListEx.GoogleAPIHelper.query_book(google_id)
+    render(conn, "show.html", book_ex: book_ex, book: book)
   end
 
   def edit(conn, %{"id" => id}) do

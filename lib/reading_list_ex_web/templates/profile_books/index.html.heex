@@ -2,23 +2,24 @@
   <thead>
     <tr>
       <th></th>
-      
+
       <th class="p-4 font-medium text-left whitespace-nowrap">Isbn 13</th>
-      
+
       <th class="p-4 font-medium text-left whitespace-nowrap">Title</th>
-      
+
       <th class="p-4 font-medium text-left">Author(s)</th>
-      
+
       <th class="p-4 font-medium text-left whitespace-nowrap">Status</th>
-      
+
       <th></th>
     </tr>
   </thead>
-  
+
   <tbody class="divide-y divide-gray-100 dark:divide-gray-600 text-gray-900 dark:text-gray-200">
     <%= for book <- @books do %>
       <tr>
         <td>
+        <%= link to: "books/#{book.book.google_api_id}" do %>
           <%= tag(:img,
             src:
               change_to_https(book.book.image_url) ||
@@ -26,14 +27,15 @@
             class: "w-20",
             alt: "book"
           ) %>
+        <% end %>
         </td>
-        
+
         <td class="p-4 font-medium whitespace-nowrap"><%= book.book.isbn_13 %></td>
-        
+
         <td class="p-4 font-medium whitespace-nowrap"><%= book.book.title %></td>
-        
+
         <td class="p-4 font-medium"><%= separate_author_names(book.book.authors) %></td>
-        
+
         <td class="p-4 mx-auto">
           <div class=" text-xs rounded-md">
             <%= form_for @conn, Routes.profile_books_path(@conn, :update), [method: "put"], fn f -> %>
@@ -55,7 +57,7 @@
             <% end %>
           </div>
         </td>
-        
+
         <td>
           <span class="grid justify-center mx-auto">
             <%= link(

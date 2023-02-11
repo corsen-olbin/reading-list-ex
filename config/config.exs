@@ -15,8 +15,7 @@ config :reading_list_ex, ReadingListExWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [view: ReadingListExWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: ReadingListEx.PubSub,
-  live_view: [signing_salt: "za3XQ+0C"],
-  pubsub: [name: MyApp.PubSub, adapter: Phoenix.PubSub.PG2]
+  live_view: [signing_salt: "za3XQ+0C"]
 
 # Configures the mailer
 #
