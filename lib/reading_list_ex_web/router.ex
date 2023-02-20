@@ -80,6 +80,7 @@ defmodule ReadingListExWeb.Router do
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
+    delete "/users/settings", UserSettingsController, :delete
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
     post "/profilebooks", ProfileBooksController, :create
