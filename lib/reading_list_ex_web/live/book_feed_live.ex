@@ -1,6 +1,8 @@
 defmodule ReadingListExWeb.BookFeedLive do
   use ReadingListExWeb, :live_view
 
+  alias Phoenix.LiveView.JS
+
   @topic "books:live"
   @time_to_update 3
 
@@ -10,7 +12,7 @@ defmodule ReadingListExWeb.BookFeedLive do
 
       <ul>
       <%= for book <- @books do %>
-        <li class="list_item" mod-first={@mod_first == book.state.body} mod-last={@mod_last == book.state.body}><%= book.state.body %></li>
+        <li id={book.state.body} data-fadein={animate_fade_in("#" <> book.state.body)} data-fadeout={animate_fade_out("#" <> book.state.body)}><%= book.state.body %></li>
       <% end %>
       </ul>
     """
@@ -46,7 +48,15 @@ defmodule ReadingListExWeb.BookFeedLive do
   defp add_transitions_tags(socket, books) do
     get_body_at_index = fn books, x -> Enum.at(books, x, %{}) |> Map.get(:state, %{}) |> Map.get(:body) end
     socket
-    |> assign(:mod_first, get_body_at_index.(books, 0))
-    |> assign(:mod_last, get_body_at_index.(books, 5))
+    |> push_event("fadein", %{id: get_body_at_index.(books, 0)})
+    |> push_event("fadeout", %{id: get_body_at_index.(books, 5)})
+  end
+
+  def animate_fade_in(element_id) do
+    JS.transition("animate-fadein", to: element_id, time: 600)
+  end
+
+  def animate_fade_out(element_id) do
+    JS.transition(%JS{}, "animate-fadeout", to: element_id, time: 600)
   end
 end

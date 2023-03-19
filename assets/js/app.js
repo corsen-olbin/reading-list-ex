@@ -39,11 +39,18 @@ liveSocket.connect()
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
 
-function changit(color) {
-    const elem = document.querySelector('[mod-first]');
-    elem.classList = color;
-    elem.animate(
-        [{ opacity: 0 }, { opacity: 1 }],
-        { duration: 2000, repeat: 1 }
-    );
-}
+window.addEventListener(`phx:fadein`, (e) => {
+    let el = document.getElementById(e.detail.id)
+    if (el) {
+        liveSocket.execJS(el, el.getAttribute("data-fadein"))
+    }
+});
+
+window.addEventListener(`phx:fadeout`, (e) => {
+    let el = document.getElementById(e.detail.id)
+    if (el) {
+        liveSocket.execJS(el, el.getAttribute("data-fadeout"))
+    }
+});
+
+
