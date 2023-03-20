@@ -4,7 +4,7 @@ defmodule ReadingListExWeb.BookFeedLive do
   alias Phoenix.LiveView.JS
 
   @topic "books:live"
-  @time_to_update 3
+  @time_to_update 1
 
   def render(assigns) do
     ~H"""
@@ -12,7 +12,7 @@ defmodule ReadingListExWeb.BookFeedLive do
 
       <ul>
       <%= for book <- @books do %>
-        <li id={book.state.body} data-fadein={animate_fade_in("#" <> book.state.body)} data-fadeout={animate_fade_out("#" <> book.state.body)}><%= book.state.body %></li>
+        <li id={book.state.uid} data-fadein={animate_fade_in("#" <> book.state.uid)} phx-remove={JS.hide(transition: "animate-fadeout", to: "#" <> book.state.uid, time: 500)}><%= book.state.title %></li>
       <% end %>
       </ul>
     """
@@ -38,7 +38,7 @@ defmodule ReadingListExWeb.BookFeedLive do
     now = DateTime.utc_now()
     cond do
       DateTime.diff(now, head.time) > @time_to_update ->
-        remaining = Enum.take(list, 5)
+        remaining = Enum.take(list, 4)
         { true, [%{ state: new_state, time: now } | remaining] }
 
       true -> { false, list }
@@ -46,10 +46,10 @@ defmodule ReadingListExWeb.BookFeedLive do
   end
 
   defp add_transitions_tags(socket, books) do
-    get_body_at_index = fn books, x -> Enum.at(books, x, %{}) |> Map.get(:state, %{}) |> Map.get(:body) end
+    get_id_at_index = fn books, x -> Enum.at(books, x, %{}) |> Map.get(:state, %{}) |> Map.get(:uid) end
     socket
-    |> push_event("fadein", %{id: get_body_at_index.(books, 0)})
-    |> push_event("fadeout", %{id: get_body_at_index.(books, 5)})
+    |> push_event("fadein", %{id: get_id_at_index.(books, 0)})
+    # |> push_event("fadeout", %{id: get_id_at_index.(books, 5)})
   end
 
   def animate_fade_in(element_id) do
@@ -57,6 +57,6 @@ defmodule ReadingListExWeb.BookFeedLive do
   end
 
   def animate_fade_out(element_id) do
-    JS.transition(%JS{}, "animate-fadeout", to: element_id, time: 600)
+    JS.transition("animate-fadeout", to: element_id, time: 600)
   end
 end

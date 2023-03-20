@@ -55,6 +55,6 @@ defmodule ReadingListExWeb.BookController do
 
     conn
     |> put_flash(:info, "Book deleted successfully.")
-    |> redirect(to: Routes.book_path(conn, :index))
+    |> redirect(to: Routes.search_path(conn, :index))
   end
 end
