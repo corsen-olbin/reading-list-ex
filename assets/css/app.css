@@ -90,3 +90,24 @@
   cursor: pointer;
 }
 
+/* .list_item {
+  background-color: transparent;
+}
+
+.list_item[mod-first] {
+  animation-name: backgroundColorPalette;
+  animation-duration: 2s;
+}
+
+@keyframes backgroundColorPalette {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: yellow;
+  }
+  100% {
+    background-color: transparent;
+  }
+} */
+

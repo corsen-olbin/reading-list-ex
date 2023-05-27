@@ -1,0 +1,19 @@
+<div class="flex justify-center">
+  <section>
+    <div class="px-4 py-32 mx-auto lg:flex">
+      <div class="max-w-xl mx-auto text-center">
+        <h1 class="text-3xl font-extrabold sm:text-5xl mb-6">
+          Welcome To Reading List EX
+        </h1>
+
+        <h3 class="text-xl font-bold mb-2">See what others are reading...</h3>
+        <ul>
+          <%= for book <- @books do %>
+            <!--<li id={book.state.uid} data-fadein={animate_fade_in("#" <> book.state.uid)} phx-remove={JS.hide(transition: "animate-fadeout", to: "#" <> book.state.uid, time: 500)}><%= book.state.title %></li> -->
+            <li class="text-md font-bold italic text-gray-300 hover:text-gray-600"id={book.state.uid}><%= link(book.state.title, to: "books/#{book.state.uid}")%></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>

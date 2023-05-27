@@ -79,6 +79,20 @@ defmodule ReadingListExWeb.UserSettingsController do
     end
   end
 
+  def delete(conn, _params) do
+    user = conn.assigns.current_user
+
+    case Accounts.delete_user(user) do
+      {:ok, _user} ->
+        conn
+        |> put_flash(:info, "Profile deleted successfully.")
+        |> UserAuth.log_out_user()
+
+      {:error, changeset} ->
+        render(conn, "edit.html", delete_changeset: changeset)
+    end
+  end
+
   defp assign_email_and_password_changesets(conn, _opts) do
     user = conn.assigns.current_user
     profile = conn.assigns.current_profile
@@ -87,5 +101,6 @@ defmodule ReadingListExWeb.UserSettingsController do
     |> assign(:email_changeset, Accounts.change_user_email(user))
     |> assign(:password_changeset, Accounts.change_user_password(user))
     |> assign(:profile_changeset, Library.change_profile(profile))
+    |> assign(:delete_changeset, Library.change_profile(profile))
   end
 end

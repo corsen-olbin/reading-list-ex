@@ -4,38 +4,40 @@
       <th scope="col" class="relative px-6 py-3">
         <span class="sr-only">Thumbnail</span>
       </th>
-      
+
       <th scope="col" class="p-4 font-medium text-left whitespace-nowrap">Title</th>
-      
+
       <th scope="col" class="p-4 font-medium text-left whitespace-nowrap">
         Author(s)
       </th>
-      
+
       <th scope="col" class="p-4 font-medium text-left whitespace-nowrap">
         <span class="sr-only">Edit</span>
       </th>
     </tr>
   </thead>
-  
+
   <tbody class="divide-y divide-gray-200 dark:divide-gray-600 text-gray-900 dark:text-gray-200">
     <%= for book <- @books do %>
       <tr class="my-4">
         <td>
+        <%= link to: "books/#{book["id"]}" do %>
           <%= tag(:img,
             src: change_to_https(book["volumeInfo"]["imageLinks"]["smallThumbnail"]),
             class: "w-20",
             alt: "book"
           ) %>
+        <% end %>
         </td>
-        
+
         <td class="p-4 font-medium whitespace-nowrap">
           <%= book["volumeInfo"]["title"] %>
         </td>
-        
+
         <td class="p-4 font-medium whitespace-nowrap">
           <%= join_author_names(book["volumeInfo"]["authors"]) %>
         </td>
-        
+
         <td class="px-6 py-4 whitespace-nowrap">
           <%= if book.in_library do %>
             <%= button(

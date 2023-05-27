@@ -20,9 +20,9 @@ defmodule ReadingListExWeb.Router do
   scope "/", ReadingListExWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/", PageLive
     get "/search", SearchController, :index
-    resources "/books", BookController, only: [:index, :show]
+    resources "/books", BookController, only: [:show], param: "google_id"
     resources "/profiles", ProfilesController, only: [:index, :show]
   end
 
@@ -79,6 +79,7 @@ defmodule ReadingListExWeb.Router do
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
+    delete "/users/settings", UserSettingsController, :delete
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
     post "/profilebooks", ProfileBooksController, :create

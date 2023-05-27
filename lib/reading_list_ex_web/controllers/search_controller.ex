@@ -15,7 +15,7 @@ defmodule ReadingListExWeb.SearchController do
     end
   end
 
-  defp set_book_in_library_flags(books, nil), do: books
+  defp set_book_in_library_flags(books, nil), do: Enum.map(books, fn b -> Map.put(b, :in_library, false) end)
 
   defp set_book_in_library_flags(books, profile) do
     books_in_library =
