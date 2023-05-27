@@ -20,11 +20,10 @@ defmodule ReadingListExWeb.Router do
   scope "/", ReadingListExWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/", PageLive
     get "/search", SearchController, :index
     resources "/books", BookController, only: [:show], param: "google_id"
     resources "/profiles", ProfilesController, only: [:index, :show]
-    live "/bookslive", BookFeedLive
   end
 
   # Other scopes may use custom stacks.

@@ -1,28 +1,19 @@
-defmodule ReadingListExWeb.BookFeedLiveComponent do
-  use Phoenix.LiveComponent
+defmodule ReadingListExWeb.PageLive do
+  use Phoenix.LiveView
   use Phoenix.HTML
+
+  alias ReadingListEx.Library
   # alias Phoenix.LiveView.JS
 
   @topic "books:live"
   @time_to_update 5
 
-  def render(assigns) do
-    ~H"""
-      <div>
-      <ul>
-      <%= for book <- @books do %>
-        <!--<li id={book.state.uid} data-fadein={animate_fade_in("#" <> book.state.uid)} phx-remove={JS.hide(transition: "animate-fadeout", to: "#" <> book.state.uid, time: 500)}><%= book.state.title %></li> -->
-        <li id={book.state.uid}><%= link(book.state.title, to: "books/#{book.state.uid}")%></li>
-      <% end %>
-      </ul>
-      </div>
-    """
-  end
-
   def mount(_params, _session, socket) do
     ReadingListExWeb.Endpoint.subscribe(@topic)
-
-    {:ok, assign(socket, books: [])}
+    now = DateTime.utc_now()
+    new_5_books = Library.get_newest_5_profile_books()
+     |> Enum.map(fn pb -> %{state: %{uid: pb.book.google_api_id, title: pb.book.title}, time: now} end)
+    {:ok, assign(socket, books: new_5_books)}
   end
 
   def handle_info(%{topic: @topic, payload: state}, socket) do
