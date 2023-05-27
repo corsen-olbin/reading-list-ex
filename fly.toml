@@ -15,7 +15,7 @@ kill_timeout = "5s"
   release_command = "/app/bin/migrate"
 
 [env]
-  PHX_HOST = "reading-list-ex.fly.dev"
+  PHX_HOST = "readinglistex.com"
   PORT = "8080"
 
 [[services]]
