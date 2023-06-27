@@ -2,7 +2,7 @@ defmodule ReadingListEx.GoogleAPIHelper do
   def google_book_url, do: "https://www.googleapis.com/books/v1"
 
   def query_books(params) do
-    query = :uri_string.compose_query([{"q", params["query"]}])
+    query = :uri_string.compose_query([{"q", params["q"]}])
     execute_query("#{google_book_url()}/volumes?#{query}")
   end
 

@@ -34,7 +34,7 @@
             <nav class="justify-center">
               <%= form_for @conn, Routes.search_path(@conn, :index), [method: :get], fn f -> %>
                 <div class="hidden w-full md:flex">
-                  <%= search_input(f, :query,
+                  <%= search_input(f, :q,
                     class:
                       "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700  leading-tight focus:outline-none focus:shadow-outline dark:bg-slate-700 dark:text-gray-400",
                     placeholder: "Search for your next read..."
@@ -57,7 +57,10 @@
     </div>
      <%= @inner_content %>
     <footer class="bg-gray-50 dark:bg-slate-800">
-      <div class="max-w-screen-xl px-4 py-8 mx-auto space-y-10 sm:px-6 lg:px-8">
+      <div class="flex items-center max-w-screen-xl px-4 py-8 mx-auto sm:px-6 lg:px-8">
+        <div class="mr-1 text-sm text-gray-500">
+          <p>Website by Corbin Olsen</p>
+        </div>
         <div class="sm:items-center sm:justify-between sm:flex">
           <div class="flex mt-8 space-x-6 text-gray-500 sm:mt-0">
             <a
@@ -76,12 +79,6 @@
               </svg>
             </a>
           </div>
-        </div>
-        
-        <div class="justify-end text-sm text-gray-500">
-          <p>Website by Corbin Olsen</p>
-          
-          <p>Icons from <a class="underline" href="https://icons8.com">icons8.com</a></p>
         </div>
       </div>
     </footer>

@@ -23,7 +23,7 @@
         <td>
         <%= link to: "books/#{book["id"]}" do %>
           <%= tag(:img,
-            src: change_to_https(book["volumeInfo"]["imageLinks"]["smallThumbnail"]),
+            src: change_to_https(book["volumeInfo"]["imageLinks"]["smallThumbnail"]) || Routes.static_path(@conn, "/images/128px-Placeholder_book.svg.png"),
             class: "w-20",
             alt: "book"
           ) %>
