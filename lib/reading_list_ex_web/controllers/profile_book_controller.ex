@@ -42,12 +42,12 @@ defmodule ReadingListExWeb.ProfileBooksController do
 
         conn
         |> put_flash(:info, "Book added to Library successfully.")
-        |> redirect(to: Routes.search_path(conn, :index, %{"query" => query}))
+        |> redirect(to: Routes.search_path(conn, :index, %{"q" => query}))
 
       {:error, _} ->
         conn
         |> put_flash(:info, "Failed to add Book to Library.")
-        |> redirect(to: Routes.search_path(conn, :index, %{"query" => query}))
+        |> redirect(to: Routes.search_path(conn, :index, %{"q" => query}))
     end
 
 
