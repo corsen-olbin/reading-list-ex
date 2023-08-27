@@ -23,7 +23,7 @@
         <td>
         <%= link to: "books/#{book["id"]}" do %>
           <%= tag(:img,
-            src: change_to_https(book["volumeInfo"]["imageLinks"]["smallThumbnail"]),
+            src: change_to_https(book["volumeInfo"]["imageLinks"]["smallThumbnail"]) || Routes.static_path(@conn, "/images/128px-Placeholder_book.svg.png"),
             class: "w-20",
             alt: "book"
           ) %>
@@ -53,7 +53,7 @@
               <%= hidden_input(f, :action, name: "google_id", value: book["id"]) %> <%= hidden_input(
                 f,
                 :query,
-                value: @conn.query_params["query"]
+                value: @conn.query_params["q"]
               ) %>
               <%= submit class: "grid items-center justify-center text-indigo-600 dark:text-indigo-400 border border-indigo-600 dark:border-indigo-400 rounded-full hover:text-white hover:bg-indigo-600 dark:hover:bg-indigo-400 active:bg-indigo-500 focus:outline-none focus:ring" do %>
                 <span class="m-2 material-symbols-outlined">bookmark_add</span>
