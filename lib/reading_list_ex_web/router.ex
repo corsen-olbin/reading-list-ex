@@ -87,6 +87,7 @@ defmodule ReadingListExWeb.Router do
     delete "/profilebooks/:id", ProfileBooksController, :delete
     delete "/profilebooks", ProfileBooksController, :delete
     get "/library", ProfileBooksController, :index
+    live "/librarylive", LibraryLive
   end
 
   scope "/", ReadingListExWeb do

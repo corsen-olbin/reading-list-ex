@@ -38,7 +38,7 @@
 
         <td class="p-4 mx-auto">
           <div class=" text-xs rounded-md">
-            <%= form_for @conn, Routes.profile_books_path(@conn, :update), [method: "put"], fn f -> %>
+            <%= form_for @socket, Routes.profile_books_path(@socket, :update), [method: "put"], fn f -> %>
               <%= hidden_input(f, :id, name: "id", value: book.id) %> <%= select(
                 f,
                 :status,

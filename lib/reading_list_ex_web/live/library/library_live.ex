@@ -1,7 +1,8 @@
 defmodule ReadingListExWeb.LibraryLive do
   use ReadingListExWeb, :live_view
+  on_mount ReadingListExWeb.UserLiveAuth
 
-  def mount(_params, _session, socket), do: {:ok, socket}
+  def mount(_params, _session, socket), do: {:ok, socket }
 
   def handle_params(_params, _url, socket) do
     {:noreply, assign_books(socket)}
