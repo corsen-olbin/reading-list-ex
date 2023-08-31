@@ -242,17 +242,18 @@ defmodule ReadingListEx.Library do
   def get_profile_book(id), do: Repo.get(ProfileBook, id)
 
   def get_newest_5_profile_books() do
-
-    subset = from profile_book in ProfileBook,
-      distinct: profile_book.book_id
+    subset =
+      from profile_book in ProfileBook,
+        distinct: profile_book.book_id
 
     query =
       from profile_book in ProfileBook,
-      join: s in subquery(subset), on: s.id == profile_book.id,
-      preload: [:book],
-      order_by: [desc: profile_book.inserted_at],
-      select: profile_book,
-      limit: 5
+        join: s in subquery(subset),
+        on: s.id == profile_book.id,
+        preload: [:book],
+        order_by: [desc: profile_book.inserted_at],
+        select: profile_book,
+        limit: 5
 
     Repo.all(query)
   end
@@ -267,6 +268,27 @@ defmodule ReadingListEx.Library do
 
     Repo.all(query)
   end
+
+  def get_profile_books_by_profile(profile, opts) do
+    query =
+      from(profile_book in ReadingListEx.Library.ProfileBook,
+        where: [profile_id: ^profile.id],
+        preload: [:book],
+        select: profile_book,
+        order_by: profile_book.status
+      )
+      |> sort(opts)
+
+    Repo.all(query)
+  end
+
+  defp sort(query, %{sort_by: sort_by, sort_dir: sort_dir})
+       when sort_by in [:title, :authors, :status] and
+              sort_dir in [:asc, :desc] do
+    order_by(query, {^sort_dir, ^sort_by})
+  end
+
+  defp sort(query, _opts), do: query
 
   def get_profile_books_by_profile_and_google_ids(profile, google_id_list) do
     query =
