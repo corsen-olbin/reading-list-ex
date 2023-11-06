@@ -2,41 +2,64 @@
   <thead>
     <tr>
       <th></th>
-
-      <th class="p-4 font-medium text-left whitespace-nowrap">Isbn 13</th>
-
-      <th class="p-4 font-medium text-left whitespace-nowrap">Title</th>
-
-      <th class="p-4 font-medium text-left">Author(s)</th>
-
-      <th class="p-4 font-medium text-left whitespace-nowrap">Status</th>
-
+      
+      <th class="p-4 font-medium text-left whitespace-nowrap">ISBN 13</th>
+      
+      <th class="p-4 font-medium text-left whitespace-nowrap">
+        <.live_component
+          module={ReadingListExWeb.LibraryLive.SortingComponent}
+          id="sorting-title"
+          key={:title}
+          sorting={@sorting}
+        />
+      </th>
+      
+      <th class="p-4 font-medium text-left">
+        <.live_component
+          module={ReadingListExWeb.LibraryLive.SortingComponent}
+          id="sorting-authors"
+          key={:authors}
+          sorting={@sorting}
+        />
+      </th>
+      
+      <th class="p-4 font-medium text-left whitespace-nowrap">
+        <.live_component
+          module={ReadingListExWeb.LibraryLive.SortingComponent}
+          id="sorting-status"
+          key={:status}
+          sorting={@sorting}
+        />
+      </th>
+      
       <th></th>
     </tr>
   </thead>
-
+  
   <tbody class="divide-y divide-gray-100 dark:divide-gray-600 text-gray-900 dark:text-gray-200">
     <%= for book <- @books do %>
       <tr>
         <td>
-        <%= link to: "books/#{book.book.google_api_id}" do %>
-          <%= tag(:img,
-            src:
-              change_to_https(book.book.image_url) ||
-                Routes.static_path(@conn, "/images/128px-Placeholder_book.svg.png"),
-            class: "w-20",
-            alt: "book"
-          ) %>
-        <% end %>
+          <%= link to: "books/#{book.google_api_id}" do %>
+            <%= tag(:img,
+              src:
+                change_to_https(book.image_url) ||
+                  Routes.static_path(@conn, "/images/128px-Placeholder_book.svg.png"),
+              class: "w-20",
+              alt: "book"
+            ) %>
+          <% end %>
         </td>
-
-        <td class="p-4 font-medium whitespace-nowrap"><%= book.book.isbn_13 %></td>
-
-        <td class="p-4 font-medium whitespace-nowrap"><%= book.book.title %></td>
-
-        <td class="p-4 font-medium"><%= separate_author_names(book.book.authors) %></td>
-
-        <td class="p-4 mx-auto">
+        
+        <td class="p-4 font-medium whitespace-nowrap"><%= book.isbn_13 %></td>
+        
+        <td class="p-4 font-medium whitespace-nowrap"><%= book.title %></td>
+        
+        <td class="p-4 font-medium"><%= separate_author_names(book.authors) %></td>
+        
+        <td class="p-4 font-medium"><%= book.status %></td>
+        
+        <%!-- <td class="p-4 mx-auto">
           <div class=" text-xs rounded-md">
             <%!-- <%= form_for @socket, Routes.profile_books_path(@socket, :update), [method: "put"], fn f -> %>
               <%= hidden_input(f, :id, name: "id", value: book.id) %> <%= select(
@@ -54,10 +77,9 @@
                   "py-2 pl-2 pr-8 text-xs font-medium border-gray-200 dark:border-gray-600 rounded-md hover:z-10 focus:outline-none focus:border-indigo-600 dark:focus:border-indigo-400 focus:z-10 hover:dark:bg-slate-850 focus:ring-0 dark:bg-slate-800",
                 onchange: "this.form.submit()"
               ) %>
-            <% end %> --%>
+            <% end %> 
           </div>
-        </td>
-
+        </td> --%>
         <td>
           <span class="grid justify-center mx-auto">
             <%!-- <%= link(

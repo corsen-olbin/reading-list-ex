@@ -269,13 +269,21 @@ defmodule ReadingListEx.Library do
     Repo.all(query)
   end
 
-  def get_profile_books_by_profile(profile, opts) do
+  def get_library_records_by_profile(profile, opts) do
     query =
-      from(profile_book in ReadingListEx.Library.ProfileBook,
+      from(pb in ReadingListEx.Library.ProfileBook,
+        join: b in assoc(pb, :book),
         where: [profile_id: ^profile.id],
-        preload: [:book],
-        select: profile_book,
-        order_by: profile_book.status
+        select: %{
+          id: pb.id,
+          status: pb.status,
+          title: b.title,
+          subtitle: b.subtitle,
+          google_api_id: b.google_api_id,
+          isbn_13: b.isbn_13,
+          authors: b.authors,
+          image_url: b.image_url
+        }
       )
       |> sort(opts)
 
@@ -283,9 +291,15 @@ defmodule ReadingListEx.Library do
   end
 
   defp sort(query, %{sort_by: sort_by, sort_dir: sort_dir})
-       when sort_by in [:title, :authors, :status] and
+       when sort_by in [:title, :authors] and
               sort_dir in [:asc, :desc] do
-    order_by(query, {^sort_dir, ^sort_by})
+    order_by(query, [_pb, b], {^sort_dir, field(b, ^sort_by)})
+  end
+
+  defp sort(query, %{sort_by: sort_by, sort_dir: sort_dir})
+       when sort_by in [:status] and
+              sort_dir in [:asc, :desc] do
+    order_by(query, [pb, _b], {^sort_dir, field(pb, ^sort_by)})
   end
 
   defp sort(query, _opts), do: query
