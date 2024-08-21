@@ -90,6 +90,12 @@ defmodule ReadingListExWeb.Router do
   end
 
   scope "/", ReadingListExWeb do
+    pipe_through [:api]
+
+    post "/profilebooks/update-from-goodreads", ProfileBooksController, :update_from_goodreads_rss_feed
+  end
+
+  scope "/", ReadingListExWeb do
     pipe_through [:browser]
 
     delete "/users/log_out", UserSessionController, :delete

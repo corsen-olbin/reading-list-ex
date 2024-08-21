@@ -4,6 +4,8 @@ defmodule ReadingListExWeb.ProfileBooksController do
   alias ReadingListEx.Library
   alias ReadingListEx.Library.{Book}
 
+  require Logger
+
   def index(conn, _params) do
     profile = conn.assigns.current_profile
 
@@ -69,6 +71,18 @@ defmodule ReadingListExWeb.ProfileBooksController do
         |> put_flash(:info, "Failed to update book status.")
     end
     |> redirect(to: Routes.profile_books_path(conn, :index))
+  end
+
+  def update_from_goodreads_rss_feed(conn, _) do
+    {:ok, body} =
+      case HTTPoison.get("https://www.goodreads.com/review/list_rss/180383252?shelf=%23ALL%23") do
+        {:ok, %HTTPoison.Response{status_code: _code, body: body}} -> {:ok, body}
+        {:error, %{reason: reason}} -> {:error, reason}
+      end
+
+      {:ok, map_of_rss} = FastRSS.parse_rss(body)
+      Logger.info(Enum.join(Map.keys(map_of_rss), ", "))
+      send_resp(conn, 204, "")
   end
 
   def delete(conn, %{"id" => id}) do
